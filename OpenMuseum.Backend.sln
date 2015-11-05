@@ -14,7 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 		PublishScripts\Configurations\OpenMuseum-Backend-WAWS-dev.json = PublishScripts\Configurations\OpenMuseum-Backend-WAWS-dev.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMuseum.Backend", "OpenMuseum.Backend\OpenMuseum.Backend.csproj", "{86CADB26-5817-46B6-88C7-76D5753722C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMuseum.Web", "OpenMuseum.Backend\OpenMuseum.Web.csproj", "{86CADB26-5817-46B6-88C7-76D5753722C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMuseum.Repositories", "OpenMuseum.Repositories\OpenMuseum.Repositories.csproj", "{186C461D-9481-4F73-A89B-A24CA36663F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMuseum.Models", "OpenMuseum.Models\OpenMuseum.Models.csproj", "{40E0C14B-35ED-4D7C-9089-1595E5AA374B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +30,14 @@ Global
 		{86CADB26-5817-46B6-88C7-76D5753722C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86CADB26-5817-46B6-88C7-76D5753722C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86CADB26-5817-46B6-88C7-76D5753722C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186C461D-9481-4F73-A89B-A24CA36663F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186C461D-9481-4F73-A89B-A24CA36663F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186C461D-9481-4F73-A89B-A24CA36663F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186C461D-9481-4F73-A89B-A24CA36663F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E0C14B-35ED-4D7C-9089-1595E5AA374B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E0C14B-35ED-4D7C-9089-1595E5AA374B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E0C14B-35ED-4D7C-9089-1595E5AA374B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E0C14B-35ED-4D7C-9089-1595E5AA374B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
