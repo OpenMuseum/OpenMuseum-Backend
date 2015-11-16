@@ -11,5 +11,10 @@ namespace OpenMuseum.Backend.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
+        public bool Default { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
+
+        public virtual ICollection<DataLayer> DataLayers { get; set; }
     }
 }

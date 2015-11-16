@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace OpenMuseum.Backend.Controllers
 {
-    public class PointsController : Controller
+    public class PointController : Controller
     {
         // GET: BaseLayers
         public ActionResult Index()

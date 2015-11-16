@@ -18,6 +18,9 @@ namespace OpenMuseum.Repositories
             baseLayer.Name = "Modern Saratov";
             baseLayer.Description = "Modern saratov layer";
             baseLayer.Url = "http://sarkrepost.azurewebsites.net/Data/base.jpg";
+            baseLayer.Default = true;
+            baseLayer.Height = 1000;
+            baseLayer.Width = 2000;
 
             context.BaseLayers.Add(baseLayer);
 
