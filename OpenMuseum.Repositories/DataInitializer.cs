@@ -32,6 +32,16 @@ namespace OpenMuseum.Repositories
 
             context.DataLayers.Add(dataLayer);
 
+            var point = new Point();
+            point.Id = 1;
+            point.DataLayerId = 1;
+            point.Name = "Eufel tower";
+            point.Content = "<b>tower</b>";
+            point.Latitude = 2400;
+            point.Longitude = 3000;
+
+            context.Points.Add(point);
+
             context.SaveChanges();
         }
     }

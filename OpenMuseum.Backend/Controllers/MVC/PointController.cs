@@ -13,9 +13,9 @@ namespace OpenMuseum.Backend.Controllers
         public ActionResult Index()
         {
             var pointsRepository = new PointsRepository();
-            var points = pointsRepository.GetAll();
+            //var points = pointsRepository.GetAll();
 
-            return View(points);
+            return View();
         }
 
         // GET: BaseLayers/Details/5

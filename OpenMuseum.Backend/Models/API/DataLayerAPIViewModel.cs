@@ -13,8 +13,10 @@ namespace OpenMuseum.Backend.Models
             Name = layer.Name;
             Description = layer.Description;
             BaseLayerId = layer.BaseLayerId;
-            Points = layer.Points.Select(point => new PointAPIViewModel(point));
         }
+
+        public DataLayerAPIViewModel()
+        { }
 
         public long Id { get; set; }
         public string Name { get; set; }
