@@ -17,10 +17,14 @@ namespace OpenMuseum.Backend.Controllers
             var dataLayersRepository = new DataLayersRepository();
             var layers = dataLayersRepository.GetAll(out context).ToList();
 
-            using (context)
+            var result = layers.Select(layer => new DataLayerAPIViewModel(layer)
             {
-                return layers.Select(layer => new DataLayerAPIViewModel(layer));
-            }
+                Points = layer.Points.Select(point => new PointAPIViewModel(point)).ToList()
+            }).ToList();
+
+            context.Dispose();
+
+            return result;
         }
 
         // GET: DataLayer

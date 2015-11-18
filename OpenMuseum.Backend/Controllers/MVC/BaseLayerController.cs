@@ -2,11 +2,11 @@
 using OpenMuseum.Backend.ViewModels;
 using OpenMuseum.Repositories;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO.Compression;
 
 namespace OpenMuseum.Backend.Controllers
 {
@@ -51,31 +51,51 @@ namespace OpenMuseum.Backend.Controllers
         {
             try
             {
-
                 if (Request.Files.Count > 0)
                 {
                     var file = Request.Files[0];
 
                     if (file != null && file.ContentLength > 0)
                     {
-                        var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Data/"), fileName);
-                        file.SaveAs(path);
+                        if (IsValidMap(file))
+                        {
+                            var uniqId = Guid.NewGuid();
+                            var fileName = uniqId + Path.GetExtension(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/App_Data/"), fileName);
+                            file.SaveAs(path);
 
-                        model.Url = ResolveServerUrl(Path.Combine("/Data/", fileName), false);
+                            model.UniqId = uniqId;
+                            model.Url = GetCurrentDomain(Request) + "/Public/" + uniqId + "/{z}/{x}/{y}.png";
+
+                            var extractPath = Path.Combine(Server.MapPath("~/Public/"), uniqId.ToString());
+                            ZipFile.ExtractToDirectory(path, extractPath);
+
+                            var baseLayersRepository = new BaseLayersRepository();
+
+                            baseLayersRepository.Add(model);
+
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
 
-                var baseLayersRepository = new BaseLayersRepository();
-
-                baseLayersRepository.Add(model);
-
-                return RedirectToAction("Index");
+                return View();
             }
             catch
             {
                 return View();
             }
+        }
+
+        public static string GetCurrentDomain(HttpRequestBase request)
+        {
+            return request.Url.Scheme + Uri.SchemeDelimiter + request.Url.Host +
+                (request.Url.IsDefaultPort ? "" : ":" + request.Url.Port);
+        }
+
+        private bool IsValidMap(HttpPostedFileBase file)
+        {
+            return true;
         }
 
         // GET: BaseLayers/Edit/5
@@ -103,36 +123,35 @@ namespace OpenMuseum.Backend.Controllers
 
                     if (file != null && file.ContentLength > 0)
                     {
-                        var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Data/"), fileName);
-                        file.SaveAs(path);
 
-                        model.Url = ResolveServerUrl(Path.Combine("/Data/", fileName), false);
+                        if (IsValidMap(file))
+                        {
+                            var uniqId = Guid.NewGuid();
+                            var fileName = uniqId + Path.GetExtension(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/App_Data/"), fileName);
+                            file.SaveAs(path);
+
+                            model.UniqId = uniqId;
+                            model.Url = GetCurrentDomain(Request) + "/Public/" + uniqId + "/{z}/{x}/{y}.png";
+
+                            var extractPath = Path.Combine(Server.MapPath("~/Public/"), uniqId.ToString());
+                            ZipFile.ExtractToDirectory(path, extractPath);
+
+                            var baseLayersRepository = new BaseLayersRepository();
+
+                            baseLayersRepository.Add(model);
+
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
 
-                var baseLayersRepository = new BaseLayersRepository();
-
-                baseLayersRepository.Update(model);
-
-                return RedirectToAction("Index");
+                return View();
             }
             catch (Exception ex)
             {
                 return View();
             }
-        }
-
-        public static string ResolveServerUrl(string serverUrl, bool forceHttps)
-        {
-            if (serverUrl.IndexOf("://") > -1)
-                return serverUrl;
-
-            string newUrl = serverUrl;
-            Uri originalUri = System.Web.HttpContext.Current.Request.Url;
-            newUrl = (forceHttps ? "https" : originalUri.Scheme) +
-                "://" + originalUri.Authority + newUrl;
-            return newUrl;
         }
 
         // GET: BaseLayers/Delete/5

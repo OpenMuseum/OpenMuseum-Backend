@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +16,18 @@ namespace OpenMuseum.Repositories
         {
             var baseLayer = new BaseLayer();
 
+            var uniqId = Guid.NewGuid();
+            var sourcePath = AppDomain.CurrentDomain.BaseDirectory + "App_Data/paris1590.zip";
+            var destinationPath = AppDomain.CurrentDomain.BaseDirectory + "Public/";
+
+            var extractPath = Path.Combine(destinationPath, uniqId.ToString());
+            ZipFile.ExtractToDirectory(sourcePath, extractPath);
+
             baseLayer.Id = 1;
             baseLayer.Name = "Modern Saratov";
             baseLayer.Description = "Modern saratov layer";
-            baseLayer.Url = "http://sarkrepost.azurewebsites.net/Data/base.jpg";
+            baseLayer.UniqId = uniqId;
+            baseLayer.Url = "http://sarkrepost.azurewebsites.net/Public/" + uniqId  + "/{z}/{x}/{y}.png";
             baseLayer.Default = true;
             baseLayer.Height = 1000;
             baseLayer.Width = 2000;
