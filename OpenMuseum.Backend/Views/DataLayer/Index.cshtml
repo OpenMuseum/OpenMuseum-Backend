@@ -1,0 +1,73 @@
+﻿@model IEnumerable<OpenMuseum.Backend.Models.DataLayer>
+@{
+    ViewBag.Title = "Data layers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-7 col-sm-5">
+        <h2>Data layers</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li class="active">
+                <strong>Data layers</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-5 col-sm-7 hidden-xs">
+        <div class="row">
+            <div class="col-lg-10 col-sm-9">
+            </div>
+            <div class="col-lg-2 col-sm-3">
+                <div class="pull-right">
+                    <h2>
+                        <a href="@Url.Action("Add")" class="btn btn-primary btn-circle pull-right">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Base layer</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.BaseLayer.Name</td>
+                                    <td></td>
+                                    <td>
+                                        <div class="pull-right">
+                                            <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
+                                            <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+                                            <a href="@Url.Action("Delete", new {id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
