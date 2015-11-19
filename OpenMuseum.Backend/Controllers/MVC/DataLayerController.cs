@@ -1,13 +1,11 @@
-﻿using OpenMuseum.Backend.Models;
-using OpenMuseum.Repositories;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using OpenMuseum.Backend.Models;
+using OpenMuseum.Models;
+using OpenMuseum.Repositories;
 
-namespace OpenMuseum.Backend.Controllers
+namespace OpenMuseum.Backend.Controllers.MVC
 {
     public class DataLayerController : Controller
     {
@@ -17,7 +15,7 @@ namespace OpenMuseum.Backend.Controllers
             var dataLayersRepository = new DataLayersRepository();
 
             IDisposable context;
-            var layers = dataLayersRepository.GetAll(out context).ToList();
+            var layers = dataLayersRepository.GetAll(out context).ToList().Select(x => new DataLayerViewModel(x)).ToList();
 
             using (context)
             {
@@ -34,8 +32,7 @@ namespace OpenMuseum.Backend.Controllers
 
             if (model != null)
                 return View(model);
-            else
-                return HttpNotFound();
+            return HttpNotFound();
         }
 
         // GET: BaseLayers/Create
@@ -44,7 +41,7 @@ namespace OpenMuseum.Backend.Controllers
             var baseLayersRepository = new BaseLayersRepository();
             IDisposable context;
 
-            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).Select(x => new SelectListItem()
+            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
@@ -80,7 +77,7 @@ namespace OpenMuseum.Backend.Controllers
             var baseLayersRepository = new BaseLayersRepository();
             IDisposable context;
 
-            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).Select(x => new SelectListItem()
+            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
@@ -94,8 +91,7 @@ namespace OpenMuseum.Backend.Controllers
 
                 if (model != null)
                     return View(model);
-                else
-                    return HttpNotFound();
+                return HttpNotFound();
             }
         }
 
@@ -126,8 +122,7 @@ namespace OpenMuseum.Backend.Controllers
 
             if (model != null)
                 return View(model);
-            else
-                return HttpNotFound();
+            return HttpNotFound();
         }
 
 

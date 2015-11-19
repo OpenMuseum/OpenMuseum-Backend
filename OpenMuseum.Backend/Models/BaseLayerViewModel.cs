@@ -1,10 +1,7 @@
-﻿using OpenMuseum.Backend.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace OpenMuseum.Backend.ViewModels
+namespace OpenMuseum.Backend.Models
 {
     public class BaseLayerViewModel
     {
@@ -14,7 +11,8 @@ namespace OpenMuseum.Backend.ViewModels
             Name = layer.Name;
             Description = layer.Description;
             Url = layer.Url;
-            DataLayers = layer.DataLayers.ToList();
+            if (layer.DataLayers != null)
+                DataLayers = layer.DataLayers.ToList().Select(x=> new DataLayerViewModel(x)).ToList();
         }
 
         public long Id { get; set; }
@@ -22,6 +20,6 @@ namespace OpenMuseum.Backend.ViewModels
         public string Description { get; set; }
         public string Url { get; set; }
 
-        public List<DataLayer> DataLayers { get; set; }
+        public List<DataLayerViewModel> DataLayers { get; set; }
     }
 }

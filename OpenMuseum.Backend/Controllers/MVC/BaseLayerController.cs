@@ -1,14 +1,13 @@
-﻿using OpenMuseum.Backend.Models;
-using OpenMuseum.Backend.ViewModels;
-using OpenMuseum.Repositories;
-using System;
+﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.IO.Compression;
+using OpenMuseum.Backend.Models;
+using OpenMuseum.Repositories;
 
-namespace OpenMuseum.Backend.Controllers
+namespace OpenMuseum.Backend.Controllers.MVC
 {
     public class BaseLayerController : Controller
     {
@@ -18,7 +17,7 @@ namespace OpenMuseum.Backend.Controllers
             IDisposable context;
 
             var baseLayersRepository = new BaseLayersRepository();
-            var layers = baseLayersRepository.GetAll(out context).ToList().Select(x => new BaseLayerViewModel(x));
+            var layers = baseLayersRepository.GetAll(out context).ToList().Select(x => new BaseLayerViewModel(x)).ToList();
 
             using (context)
             {

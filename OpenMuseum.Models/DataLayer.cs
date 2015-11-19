@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using OpenMuseum.Backend.Models;
 
-namespace OpenMuseum.Backend.Models
+namespace OpenMuseum.Models
 {
     public class DataLayer
     {

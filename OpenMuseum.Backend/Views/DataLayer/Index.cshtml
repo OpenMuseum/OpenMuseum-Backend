@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OpenMuseum.Backend.Models.DataLayer>
+﻿@model IEnumerable<OpenMuseum.Backend.Models.DataLayerViewModel>
 @{
     ViewBag.Title = "Data layers";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -45,6 +45,7 @@
                                 <th>Description</th>
                                 <th>Base layer</th>
                                 <th>Points</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,8 +54,8 @@
                                 <tr>
                                     <td>@item.Name</td>
                                     <td>@item.Description</td>
-                                    <td>@item.BaseLayer.Name</td>
-                                    <td></td>
+                                    <td>@item.BaseLayerName</td>
+                                    <td>@item.Points.Count</td>
                                     <td>
                                         <div class="pull-right">
                                             <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>

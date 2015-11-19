@@ -1,42 +1,67 @@
-﻿using OpenMuseum.Repositories;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using OpenMuseum.Backend.Models;
+using OpenMuseum.Models;
+using OpenMuseum.Repositories;
 
-namespace OpenMuseum.Backend.Controllers
+namespace OpenMuseum.Backend.Controllers.MVC
 {
     public class PointController : Controller
     {
-        // GET: BaseLayers
         public ActionResult Index()
         {
             var pointsRepository = new PointsRepository();
-            //var points = pointsRepository.GetAll();
 
-            return View();
+            IDisposable context;
+            var points = pointsRepository.GetAll(out context).ToList().Select(x => new PointViewModel(x)).ToList();
+
+            using (context)
+            {
+                return View(points);
+            }
         }
 
         // GET: BaseLayers/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(long id)
         {
-            return View();
+            var pointsRepository = new PointsRepository();
+
+            var model = pointsRepository.GetById(id);
+
+            if (model != null)
+                return View(model);
+            else
+                return HttpNotFound();
         }
 
         // GET: BaseLayers/Create
-        public ActionResult Create()
+        public ActionResult Add()
         {
-            return View();
+            var dataLayersRepository = new DataLayersRepository();
+            IDisposable context;
+
+            ViewBag.ListOfDataLayers = dataLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+
+            using (context)
+            {
+                return View(new Point());
+            }
         }
 
         // POST: BaseLayers/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Add(Point model)
         {
             try
             {
-                // TODO: Add insert logic here
+                var pointsRepository = new PointsRepository();
+
+                pointsRepository.Add(model);
 
                 return RedirectToAction("Index");
             }
@@ -47,22 +72,42 @@ namespace OpenMuseum.Backend.Controllers
         }
 
         // GET: BaseLayers/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(long id)
         {
-            return View();
+            var dataLayersRepository = new DataLayersRepository();
+            IDisposable context;
+
+            ViewBag.ListOfBaseLayers = dataLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+
+            using (context)
+            {
+                var pointsRepository = new PointsRepository();
+
+                var model = pointsRepository.GetById(id);
+
+                if (model != null)
+                    return View(model);
+                return HttpNotFound();
+            }
         }
 
         // POST: BaseLayers/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Point model)
         {
             try
             {
-                // TODO: Add update logic here
+                var pointsRepository = new PointsRepository();
+
+                pointsRepository.Update(model);
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -71,16 +116,24 @@ namespace OpenMuseum.Backend.Controllers
         // GET: BaseLayers/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var pointsRepository = new PointsRepository();
+
+            var model = pointsRepository.GetById(id);
+
+            if (model != null)
+                return View(model);
+            return HttpNotFound();
         }
 
-        // POST: BaseLayers/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                var pointsRepository = new PointsRepository();
+
+                pointsRepository.Delete(id);
 
                 return RedirectToAction("Index");
             }

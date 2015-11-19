@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenMuseum.Models;
 
 namespace OpenMuseum.Repositories
 {

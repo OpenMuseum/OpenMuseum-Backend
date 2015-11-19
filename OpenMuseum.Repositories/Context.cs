@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using OpenMuseum.Models;
 
 namespace OpenMuseum.Repositories
 {

@@ -1,0 +1,80 @@
+﻿@model OpenMuseum.Models.Point
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-7 col-sm-5">
+        <h2>Points</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>@Html.ActionLink("Points", "Index")</li>
+            <li>
+                Edit
+            </li>
+            <li class="active">
+                <strong>@Model.Name</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Edit", "Point", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="ibox">
+                <div class="ibox-content">
+                     <div class="form-horizontal">
+                         @Html.HiddenFor(model => model.Id)
+
+                         <div class="form-group">
+                             @Html.LabelFor(model => model.Name, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             <div class="col-lg-6 col-sm-6">
+                                 @Html.TextBoxFor(model => model.Name)
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             @Html.LabelFor(model => model.Latitude, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             <div class="col-lg-6 col-sm-6">
+                                 @Html.TextBoxFor(model => model.Latitude)
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             @Html.LabelFor(model => model.Longitude, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             <div class="col-lg-6 col-sm-6">
+                                 @Html.TextBoxFor(model => model.Longitude)
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             @Html.LabelFor(model => model.DataLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             <div class="col-lg-6 col-sm-6">
+                                 @Html.DropDownListFor(model => model.DataLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers)
+                             </div>
+                         </div>
+                         <div class="form-group">
+                             @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             <div class="col-lg-6 col-sm-6">
+                                 @Html.TextAreaFor(model => model.Content)
+                             </div>
+                         </div>
+                     </div>
+                </div>
+                <div class="ibox-footer">
+                    <div class="row">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+}
+        </div>
+    </div>
+</div>

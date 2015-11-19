@@ -199,7 +199,9 @@
     <Compile Include="Models\API\DataLayerAPIViewModel.cs" />
     <Compile Include="Models\API\PointAPIViewModel.cs" />
     <Compile Include="Models\BaseLayerViewModel.cs" />
+    <Compile Include="Models\DataLayerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PointViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -313,6 +315,10 @@
     <Content Include="Views\DataLayer\Delete.cshtml" />
     <Content Include="Views\DataLayer\Details.cshtml" />
     <Content Include="Views\DataLayer\Edit.cshtml" />
+    <Content Include="Views\Point\Add.cshtml" />
+    <Content Include="Views\Point\Delete.cshtml" />
+    <Content Include="Views\Point\Details.cshtml" />
+    <Content Include="Views\Point\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

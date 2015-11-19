@@ -1,10 +1,8 @@
-﻿using OpenMuseum.Backend.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OpenMuseum.Models;
 
 namespace OpenMuseum.Repositories
 {
@@ -20,12 +18,10 @@ namespace OpenMuseum.Repositories
 
         public DataLayer GetById(long id)
         {
-            using (var context = new OpenMuseumContext())
-            {
-                var model = context.DataLayers.Include(x => x.BaseLayer).First(x => x.Id == id);
+            var context = new OpenMuseumContext();
+            var model = context.DataLayers.Include(x => x.BaseLayer).First(x => x.Id == id);
 
-                return model;
-            }
+            return model;
         }
 
         public long Add(DataLayer model)
