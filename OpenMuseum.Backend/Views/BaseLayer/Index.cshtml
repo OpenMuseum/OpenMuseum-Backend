@@ -58,7 +58,10 @@
                                         <div class="pull-right">
                                             <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
                                             <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
-                                            <a href="@Url.Action("Delete", new {id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                            @if (!item.DataLayers.Any())
+                                            {
+                                                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                            }
                                         </div>
                                     </td>
                                 </tr>

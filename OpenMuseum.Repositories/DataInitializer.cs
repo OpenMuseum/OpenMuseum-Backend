@@ -11,7 +11,7 @@ using OpenMuseum.Models;
 
 namespace OpenMuseum.Repositories
 {
-    public class DataInitializer : DropCreateDatabaseAlways<OpenMuseumContext>
+    public class DataInitializer : DropCreateDatabaseIfModelChanges<OpenMuseumContext>
     {
         protected override void Seed(OpenMuseumContext context)
         {
