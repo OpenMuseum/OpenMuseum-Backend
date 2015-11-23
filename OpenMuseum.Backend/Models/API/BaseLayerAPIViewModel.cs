@@ -1,4 +1,5 @@
 ﻿using OpenMuseum.Backend.Models;
+using OpenMuseum.Models;
 
 namespace OpenMuseum.Backend.ViewModels
 {

@@ -186,6 +186,7 @@
     <Compile Include="Controllers\API\DataLayersController.cs" />
     <Compile Include="Controllers\MVC\AccountController.cs" />
     <Compile Include="Controllers\MVC\BaseLayerController.cs" />
+    <Compile Include="Controllers\MVC\RegionController.cs" />
     <Compile Include="Controllers\MVC\PointController.cs" />
     <Compile Include="Controllers\MVC\DataLayerController.cs" />
     <Compile Include="Controllers\API\BaseLayersController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Models\BaseLayerViewModel.cs" />
     <Compile Include="Models\DataLayerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\PointViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -319,6 +321,11 @@
     <Content Include="Views\Point\Delete.cshtml" />
     <Content Include="Views\Point\Details.cshtml" />
     <Content Include="Views\Point\Edit.cshtml" />
+    <Content Include="Views\Region\Add.cshtml" />
+    <Content Include="Views\Region\Delete.cshtml" />
+    <Content Include="Views\Region\Details.cshtml" />
+    <Content Include="Views\Region\Edit.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

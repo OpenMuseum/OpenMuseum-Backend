@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using OpenMuseum.Models;
 
-namespace OpenMuseum.Backend.Models
+namespace OpenMuseum.Models
 {
     public class BaseLayer
     {
@@ -18,5 +15,6 @@ namespace OpenMuseum.Backend.Models
         public string Url { get; set; }
 
         public virtual ICollection<DataLayer> DataLayers { get; set; }
+        public virtual ICollection<Region> Regions { get; set; }
     }
 }

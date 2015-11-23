@@ -1,18 +1,18 @@
-﻿@model IEnumerable<OpenMuseum.Backend.Models.PointViewModel>
+﻿@model IEnumerable<OpenMuseum.Backend.Models.RegionViewModel>
 @{
-    ViewBag.Title = "Points";
+    ViewBag.Title = "Regions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Points</h2>
+        <h2>Regions</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Home</a>
             </li>
             <li class="active">
-                <strong>Points</strong>
+                <strong>Regions</strong>
             </li>
         </ol>
     </div>
@@ -43,7 +43,7 @@
                             <tr>
                                 <td>Name</td>
                                 <td>Description</td>
-                                <td>Data layer</td>
+                                <td>Base layer</td>
                                 <td></td>
                             </tr>
                         </thead>
@@ -53,7 +53,7 @@
                                 <tr>
                                     <td>@item.Name</td>
                                     <td>@item.Description</td>
-                                    <td>@item.DataLayerName</td>
+                                    <td>@item.BaseLayerName</td>
                                     <td>
                                         <div class="pull-right">
                                             <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>

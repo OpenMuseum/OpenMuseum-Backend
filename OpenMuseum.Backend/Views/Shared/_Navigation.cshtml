@@ -22,13 +22,16 @@
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "BaseLayer")"><i class="fa fa-desktop"></i> <span class="nav-label">Base layers</span></a>
+                <a href="@Url.Action("Index", "BaseLayer")"><i class="fa fa-bars"></i> <span class="nav-label">Base layers</span></a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "DataLayer")"><i class="fa fa-desktop"></i> <span class="nav-label">Data layers</span></a>
+                <a href="@Url.Action("Index", "Region")"><i class="fa fa-flag"></i> <span class="nav-label">Regions</span></a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "Point")"><i class="fa fa-desktop"></i> <span class="nav-label">Points</span></a>
+                <a href="@Url.Action("Index", "DataLayer")"><i class="fa fa-sitemap"></i> <span class="nav-label">Data layers</span></a>
+            </li>
+            <li class="@Html.IsSelected(action: "Index")">
+                <a href="@Url.Action("Index", "Point")"><i class="fa fa-map-marker"></i> <span class="nav-label">Points</span></a>
             </li>
         </ul>
     </div>

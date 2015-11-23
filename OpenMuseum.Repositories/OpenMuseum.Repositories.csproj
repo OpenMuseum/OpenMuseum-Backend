@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RegionsRepository.cs" />
     <Compile Include="PointsRepository.cs" />
     <Compile Include="DataLayersRepository.cs" />
     <Compile Include="BaseLayersRepository.cs" />

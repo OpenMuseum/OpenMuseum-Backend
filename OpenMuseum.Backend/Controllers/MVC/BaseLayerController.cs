@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OpenMuseum.Backend.Models;
+using OpenMuseum.Models;
 using OpenMuseum.Repositories;
 
 namespace OpenMuseum.Backend.Controllers.MVC

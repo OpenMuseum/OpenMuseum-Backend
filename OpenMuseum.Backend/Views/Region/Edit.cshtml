@@ -1,4 +1,4 @@
-﻿@model OpenMuseum.Models.Point
+﻿@model OpenMuseum.Models.Region
 
 @{
     ViewBag.Title = "Edit";
@@ -7,12 +7,12 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Points</h2>
+        <h2>Edit region</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Home</a>
             </li>
-            <li>@Html.ActionLink("Points", "Index")</li>
+            <li>@Html.ActionLink("Regions", "Index")</li>
             <li>
                 Edit
             </li>
@@ -26,7 +26,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            @using (Html.BeginForm("Edit", "Point", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Edit", "Region", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
             <div class="ibox">
                 <div class="ibox-content">
@@ -46,21 +46,15 @@
                              </div>
                          </div>
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Latitude, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             @Html.LabelFor(model => model.Coordinates, new { @class = "col-lg-6 col-sm-6 control-label" })
                              <div class="col-lg-6 col-sm-6">
-                                 @Html.TextBoxFor(model => model.Latitude)
+                                 @Html.TextBoxFor(model => model.Coordinates)
                              </div>
                          </div>
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Longitude, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
                              <div class="col-lg-6 col-sm-6">
-                                 @Html.TextBoxFor(model => model.Longitude)
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.DataLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.DropDownListFor(model => model.DataLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers)
+                                 @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers)
                              </div>
                          </div>
                          <div class="form-group">

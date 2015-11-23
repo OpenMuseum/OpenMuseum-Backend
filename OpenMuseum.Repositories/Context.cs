@@ -12,6 +12,7 @@ namespace OpenMuseum.Repositories
         public DbSet<BaseLayer> BaseLayers { get; set; }
         public DbSet<DataLayer> DataLayers { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Region> Regions { get; set; }
         public DbSet<Point> Points { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

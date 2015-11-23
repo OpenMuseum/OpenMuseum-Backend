@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BaseLayer.cs" />
     <Compile Include="DataLayer.cs" />
+    <Compile Include="Region.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

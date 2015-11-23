@@ -1,4 +1,4 @@
-﻿@model OpenMuseum.Backend.Models.BaseLayer
+﻿@model OpenMuseum.Models.BaseLayer
 
 @{
     ViewBag.Title = Model.Name;
@@ -111,6 +111,54 @@
                         else
                         {
                             <p class="text-center lead">No data layers defined for this base layer</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <h3>Regions</h3>
+                        </div>
+                        <div class="col-lg-1">
+                            <a href="@Url.Action("Add", "Region")" class="btn btn-circle btn-primary"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        @if (Model.DataLayers.Any())
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.DataLayers)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <a href="@Url.Action("Details", "Region", new { id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
+                                                    <a href="@Url.Action("Edit", "Region", new { id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+                                                    <a href="@Url.Action("Delete", "Region", new { id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p class="text-center lead">No regions defined for this base layer</p>
                         }
                     </div>
                 </div>
