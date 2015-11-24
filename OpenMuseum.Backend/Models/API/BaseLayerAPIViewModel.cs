@@ -1,11 +1,12 @@
-﻿using OpenMuseum.Backend.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
 using OpenMuseum.Models;
 
-namespace OpenMuseum.Backend.ViewModels
+namespace OpenMuseum.Backend.Models.API
 {
-    public class BaseLayerAPIViewModel
+    public class BaseLayerApiViewModel
     {
-        public BaseLayerAPIViewModel(BaseLayer layer)
+        public BaseLayerApiViewModel(BaseLayer layer)
         {
             Id = layer.Id;
             Name = layer.Name;
@@ -14,6 +15,7 @@ namespace OpenMuseum.Backend.ViewModels
             Default = layer.Default;
             Height = layer.Height;
             Width = layer.Width;
+            Regions = layer.Regions.ToList().Select(region => new RegionApiViewModel(region)).ToList();
         }
 
         public long Id { get; set; }
@@ -23,5 +25,6 @@ namespace OpenMuseum.Backend.ViewModels
         public bool Default { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+        public IEnumerable<RegionApiViewModel> Regions { get; set; }
     }
 }

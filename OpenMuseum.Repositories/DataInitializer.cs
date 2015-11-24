@@ -1,12 +1,7 @@
-﻿using OpenMuseum.Backend.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data.Entity;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenMuseum.Models;
 
 namespace OpenMuseum.Repositories
@@ -15,7 +10,6 @@ namespace OpenMuseum.Repositories
     {
         protected override void Seed(OpenMuseumContext context)
         {
-            var baseLayer = new BaseLayer();
 
             var uniqId = Guid.NewGuid();
             var sourcePath = AppDomain.CurrentDomain.BaseDirectory + "App_Data/paris1590.zip";
@@ -24,34 +18,52 @@ namespace OpenMuseum.Repositories
             var extractPath = Path.Combine(destinationPath, uniqId.ToString());
             ZipFile.ExtractToDirectory(sourcePath, extractPath);
 
-            baseLayer.Id = 1;
-            baseLayer.Name = "Modern Saratov";
-            baseLayer.Description = "Modern saratov layer";
-            baseLayer.UniqId = uniqId;
-            baseLayer.Url = "http://sarkrepost.azurewebsites.net/Public/" + uniqId  + "/{z}/{x}/{y}.png";
-            baseLayer.Default = true;
-            baseLayer.Height = 1000;
-            baseLayer.Width = 2000;
+            var baseLayer = new BaseLayer
+            {
+                Id = 1,
+                Name = "Modern Saratov",
+                Description = "Modern saratov layer",
+                UniqId = uniqId,
+                Url = "http://sarkrepost.azurewebsites.net/Public/" + uniqId + "/{z}/{x}/{y}.png",
+                Default = true,
+                Height = 1000,
+                Width = 2000
+            };
 
             context.BaseLayers.Add(baseLayer);
 
-            var dataLayer = new DataLayer();
-            dataLayer.Id = 1;
-            dataLayer.BaseLayerId = 1;
-            dataLayer.Name = "Architecture";
-            dataLayer.Description = "Architecture layer";
+            var dataLayer = new DataLayer
+            {
+                Id = 1,
+                BaseLayerId = 1,
+                Name = "Architecture",
+                Description = "Architecture layer"
+            };
 
             context.DataLayers.Add(dataLayer);
 
-            var point = new Point();
-            point.Id = 1;
-            point.DataLayerId = 1;
-            point.Name = "Eufel tower";
-            point.Content = "<b>tower</b>";
-            point.Latitude = 2400;
-            point.Longitude = 3000;
+            var point = new Point
+            {
+                Id = 1,
+                DataLayerId = 1,
+                Name = "Eufel tower",
+                Content = "<b>tower</b>",
+                Latitude = 2400,
+                Longitude = 3000
+            };
 
             context.Points.Add(point);
+
+            var region = new Region
+            {
+                Name = "Museum square",
+                Description = "Museum square description",
+                Content = "<b>tower</b>",
+                Coordinates = "",
+                BaseLayerId = 1
+            };
+
+            context.Regions.Add(region);
 
             context.SaveChanges();
         }

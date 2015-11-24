@@ -4,20 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using OpenMuseum.Backend.Models.API;
 
 namespace OpenMuseum.Backend.Controllers
 {
     public class PointsController : ApiController
     {
         // GET: DataLayers
-        public IEnumerable<PointAPIViewModel> GetAllPoints()
+        public IEnumerable<PointApiViewModel> GetAllPoints()
         {
             IDisposable context;
 
             var pointsRepository = new PointsRepository();
             var points = pointsRepository.GetAll(out context).ToList();
 
-            var result = points.Select(point => new PointAPIViewModel(point));
+            var result = points.Select(point => new PointApiViewModel(point));
 
             context.Dispose();
 
@@ -25,12 +26,12 @@ namespace OpenMuseum.Backend.Controllers
         }
 
         // GET: DataLayer
-        public PointAPIViewModel GetPoint(long id)
+        public PointApiViewModel GetPoint(long id)
         {
             var pointsRepository = new PointsRepository();
             var model = pointsRepository.GetById(id);
 
-            return new PointAPIViewModel(model);
+            return new PointApiViewModel(model);
         }
     }
 }

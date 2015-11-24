@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using OpenMuseum.Models;
+﻿using OpenMuseum.Models;
 
-namespace OpenMuseum.Backend.Models
+namespace OpenMuseum.Backend.Models.API
 {
-    public class PointAPIViewModel
+    public class PointApiViewModel
     {
-        public PointAPIViewModel(Point point)
+        public PointApiViewModel(Point point)
         {
             Id = point.Id;
             Name = point.Name;
@@ -18,7 +14,7 @@ namespace OpenMuseum.Backend.Models
             DataLayerId = point.DataLayerId;
         }
 
-        public PointAPIViewModel() {}
+        public PointApiViewModel() {}
 
         public long Id { get; set; }
         public string Name { get; set; }

@@ -38,10 +38,10 @@ namespace OpenMuseum.Backend.Controllers.MVC
         // GET: BaseLayers/Create
         public ActionResult Add()
         {
-            var dataLayersRepository = new BaseLayersRepository();
+            var baseLayersRepository = new BaseLayersRepository();
             IDisposable context;
 
-            ViewBag.ListOfDataLayers = dataLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
@@ -74,10 +74,10 @@ namespace OpenMuseum.Backend.Controllers.MVC
         // GET: BaseLayers/Edit/5
         public ActionResult Edit(long id)
         {
-            var dataLayersRepository = new DataLayersRepository();
+            var baseLayersRepository = new BaseLayersRepository();
             IDisposable context;
 
-            ViewBag.ListOfBaseLayers = dataLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name

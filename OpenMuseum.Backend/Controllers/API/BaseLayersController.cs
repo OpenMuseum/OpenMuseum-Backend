@@ -1,16 +1,16 @@
-﻿using OpenMuseum.Backend.ViewModels;
-using OpenMuseum.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using OpenMuseum.Backend.Models.API;
+using OpenMuseum.Repositories;
 
-namespace OpenMuseum.Backend.Controllers
+namespace OpenMuseum.Backend.Controllers.API
 {
     public class BaseLayersController : ApiController
     {
         // GET: BaseLayers
-        public IEnumerable<BaseLayerAPIViewModel> GetAllBaseLayers()
+        public IEnumerable<BaseLayerApiViewModel> GetAllBaseLayers()
         {
             IDisposable context;
 
@@ -19,17 +19,17 @@ namespace OpenMuseum.Backend.Controllers
 
             using (context)
             {
-                return layers.Select(layer => new BaseLayerAPIViewModel(layer));
+                return layers.Select(layer => new BaseLayerApiViewModel(layer));
             }
         }
 
         // GET: BaseLayer
-        public BaseLayerAPIViewModel GetBaseLayer(long id)
+        public BaseLayerApiViewModel GetBaseLayer(long id)
         {
             var baseLayersRepository = new BaseLayersRepository();
             var model = baseLayersRepository.GetById(id);
 
-            return new BaseLayerAPIViewModel(model);
+            return new BaseLayerApiViewModel(model);
         }
     }
 }

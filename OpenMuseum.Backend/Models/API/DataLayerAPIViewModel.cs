@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using OpenMuseum.Models;
 
-namespace OpenMuseum.Backend.Models
+namespace OpenMuseum.Backend.Models.API
 {
-    public class DataLayerAPIViewModel
+    public class DataLayerApiViewModel
     {
-        public DataLayerAPIViewModel(DataLayer layer)
+        public DataLayerApiViewModel(DataLayer layer)
         {
             Id = layer.Id;
             Name = layer.Name;
             Description = layer.Description;
             BaseLayerId = layer.BaseLayerId;
+            Points = layer.Points.ToList().Select(point => new PointApiViewModel(point)).ToList();
         }
 
-        public DataLayerAPIViewModel()
+        public DataLayerApiViewModel()
         { }
 
         public long Id { get; set; }
@@ -24,6 +23,6 @@ namespace OpenMuseum.Backend.Models
         public string Description { get; set; }
         public long BaseLayerId { get; set; }
 
-        public IEnumerable<PointAPIViewModel> Points { get; set; }
+        public IEnumerable<PointApiViewModel> Points { get; set; }
     }
 }

@@ -182,6 +182,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\RegionsController.cs" />
     <Compile Include="Controllers\API\PointsController.cs" />
     <Compile Include="Controllers\API\DataLayersController.cs" />
     <Compile Include="Controllers\MVC\AccountController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\API\BaseLayerAPIViewModel.cs" />
     <Compile Include="Models\API\DataLayerAPIViewModel.cs" />
+    <Compile Include="Models\API\RegionAPIViewModel.cs" />
     <Compile Include="Models\API\PointAPIViewModel.cs" />
     <Compile Include="Models\BaseLayerViewModel.cs" />
     <Compile Include="Models\DataLayerViewModel.cs" />
