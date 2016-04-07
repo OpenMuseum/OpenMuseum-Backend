@@ -1,18 +1,18 @@
 ﻿@model OpenMuseum.Models.Region
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактировать";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Edit region</h2>
+        <h2>Редактировать регион</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="/">Home</a>
+                <a href="/">Главная</a>
             </li>
-            <li>@Html.ActionLink("Regions", "Index")</li>
+            <li>@Html.ActionLink("Регионы", "Index")</li>
             <li>
                 Edit
             </li>
@@ -26,7 +26,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            @using (Html.BeginForm("Edit", "Region", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Add", "Region", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
             <div class="ibox">
                 <div class="ibox-content">
@@ -57,19 +57,13 @@
                                  @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers)
                              </div>
                          </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.TextAreaFor(model => model.Content)
-                             </div>
-                         </div>
                      </div>
                 </div>
                 <div class="ibox-footer">
                     <div class="row">
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
                         </div>
                     </div>
                 </div>

@@ -1,20 +1,20 @@
-﻿@model OpenMuseum.Models.DataLayer
+﻿@model OpenMuseum.Models.Page
 
 @{
-    ViewBag.Title = "Добавить";
+    ViewBag.Title = "Добавить страницу";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Слои данных</h2>
+        <h2>Добавить страницу</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Главная</a>
             </li>
-            <li>Слои данных</li>
+            <li>@Html.ActionLink("Page", "Index")</li>
             <li class="active">
-                <strong>Добавить</strong>
+                <strong>Добавить страницу</strong>
             </li>
         </ol>
     </div>
@@ -23,7 +23,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            @using (Html.BeginForm("Add", "DataLayer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Add", "Page", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
             <div class="ibox">
                 <div class="ibox-content">
@@ -37,13 +37,13 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.TextAreaFor(model => model.Description)
+                                @Html.TextBoxFor(model => model.Description)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
+                            @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers)
+                                @Html.TextAreaFor(model => model.Content)
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,6 @@ namespace OpenMuseum.Backend.Models.API
             Id = region.Id;
             Name = region.Name;
             Description = region.Description;
-            Content = region.Content;
             Coordinates = region.Coordinates;
             BaseLayerId = region.BaseLayerId;
         }

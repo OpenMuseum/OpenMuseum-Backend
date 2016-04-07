@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PagesRepository.cs" />
+    <Compile Include="TagsRepository.cs" />
     <Compile Include="RegionsRepository.cs" />
     <Compile Include="PointsRepository.cs" />
     <Compile Include="DataLayersRepository.cs" />

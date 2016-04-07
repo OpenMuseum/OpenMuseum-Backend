@@ -1,6 +1,4 @@
 ﻿using OpenMuseum.Backend.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using OpenMuseum.Models;
@@ -14,10 +12,66 @@ namespace OpenMuseum.Repositories
         public DbSet<Project> Projects { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<Point> Points { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Page> Pages { get; set; }
+        
+        public OpenMuseumContext() : base("OpenMuseumContext")
+        {
+            Configuration.LazyLoadingEnabled = true;
+            Configuration.AutoDetectChangesEnabled = true;
+            Configuration.ValidateOnSaveEnabled = false;
+            Configuration.UseDatabaseNullSemantics = true;
+            Configuration.ProxyCreationEnabled = false;
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<Point>()
+                .HasRequired(x => x.Page)
+                .WithOptional(x => x.Point);
+
+            modelBuilder.Entity<Region>()
+                .HasOptional(x => x.Page)
+                .WithOptionalPrincipal(x => x.Region);
+
+            modelBuilder.Entity<Point>()
+                .HasOptional(x => x.Region)
+                .WithMany(x => x.Points)
+                .HasForeignKey(x => x.RegionId);
+
+            modelBuilder.Entity<DataLayer>()
+                .HasRequired(x => x.BaseLayer)
+                .WithMany( x => x.DataLayers)
+                .HasForeignKey( x => x.BaseLayerId);
+
+            modelBuilder.Entity<Region>()
+                .HasRequired(x => x.BaseLayer)
+                .WithMany(x => x.Regions)
+                .HasForeignKey( x=> x.BaseLayerId); 
+
+            modelBuilder.Entity<Page>()
+                .HasMany(x => x.Tags)
+                .WithMany(x => x.Pages)
+                .Map(x =>
+                {
+                    x.ToTable("PageTags");
+                    x.MapLeftKey("PageId");
+                    x.MapRightKey("TagId");
+                });
+
+            modelBuilder.Entity<Point>()
+                .HasMany(x => x.DataLayers)
+                .WithMany(x => x.Points)
+                .Map(x =>
+                {
+                    x.ToTable("DataLayerPoints");
+                    x.MapLeftKey("DataLayerId");
+                    x.MapRightKey("PointId");
+                });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace OpenMuseum.Backend.Models.API
             Content = point.Content;
             Latitude = point.Latitude;
             Longitude = point.Longitude;
-            DataLayerId = point.DataLayerId;
         }
 
         public PointApiViewModel() {}

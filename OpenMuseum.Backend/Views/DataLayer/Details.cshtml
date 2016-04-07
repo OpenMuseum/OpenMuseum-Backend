@@ -7,12 +7,12 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Data layer</h2>
+        <h2>Слой данных</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="/">Home</a>
+                <a href="/">Главная</a>
             </li>
-            <li>@Html.ActionLink("Data layers", "Index")</li>
+            <li>@Html.ActionLink("Слои данных", "Index")</li>
             <li class="active">
                 <strong>@Model.Name</strong>
             </li>
@@ -25,10 +25,10 @@
             <div class="col-lg-4 col-sm-4">
                 <div class="pull-right">
                     <h2>
-                        <a href="@Url.Action("Add")" title="Add" class="btn btn-primary btn-circle">
+                        <a href="@Url.Action("Add")" title="Добавить" class="btn btn-primary btn-circle">
                             <i class="fa fa-plus"></i>
                         </a>
-                        <a href="@Url.Action("Edit", new {id = Model.Id })" title="Edit" class="btn btn-primary btn-circle">
+                        <a href="@Url.Action("Add", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
                             <i class="fa fa-edit"></i>
                         </a>
                     </h2>
@@ -71,7 +71,7 @@
                 <div class="ibox-title">
                     <div class="row">
                         <div class="col-lg-11">
-                            <h3>Points</h3>
+                            <h3>Точки</h3>
                         </div>
                         <div class="col-lg-1">
                             <a href="@Url.Action("Add", "Point")" class="btn btn-circle btn-primary"><i class="fa fa-plus"></i></a>
@@ -85,7 +85,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Название</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -96,9 +96,9 @@
                                             <td>@item.Name</td>
                                             <td>
                                                 <div class="pull-right">
-                                                    <a href="@Url.Action("Details", "Point", new { id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                                    <a href="@Url.Action("Edit", "Point", new { id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
-                                                    <a href="@Url.Action("Delete", "Point", new { id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                                    <a href="@Url.Action("Details", "Point", new { id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                                    <a href="@Url.Action("Add", "Point", new { id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                                    <a href="@Url.Action("Delete", "Point", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -108,7 +108,7 @@
                         }
                         else
                         {
-                            <p class="text-center lead">No points defined for this base layer</p>
+                            <p class="text-center lead">Для этого слоя данных не заданы точки</p>
                         }
                     </div>
                 </div>

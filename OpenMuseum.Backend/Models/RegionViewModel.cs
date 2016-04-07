@@ -17,7 +17,6 @@ namespace OpenMuseum.Backend.Models
             Id = region.Id;
             Name = region.Name;
             Description = region.Description;
-            Content = region.Content;
             Coordinates = region.Coordinates;
             BaseLayerId = region.BaseLayerId;
             BaseLayerName = region.BaseLayer.Name;

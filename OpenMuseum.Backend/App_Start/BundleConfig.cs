@@ -40,7 +40,8 @@ namespace OpenMuseum.Backend
             // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/style.css"));
+                      "~/Content/style.css",
+                      "~/Content/local.css"));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(

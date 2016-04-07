@@ -1,37 +1,36 @@
-﻿using OpenMuseum.Backend.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenMuseum.Models;
 
 namespace OpenMuseum.Repositories
 {
-    public class BaseLayersRepository
+    public class TagsRepository
     {
-        public IEnumerable<BaseLayer> GetAll(out IDisposable context)
+        public IEnumerable<Tag> GetAll(out IDisposable context)
         {
             var db = new OpenMuseumContext();
             context = db;
- 
-            return db.BaseLayers.Include(x => x.DataLayers).Include(x => x.Regions);
+
+            return db.Tags.Include(x => x.Pages);
         }
 
-        public BaseLayer GetById(long id)
-        {
-            var context = new OpenMuseumContext();
-            var model = context.BaseLayers.Include(x => x.DataLayers).Include(x => x.Regions).First(x => x.Id == id);
-
-            return model;
-        }
-
-        public long Add(BaseLayer model)
+        public Tag GetById(long id)
         {
             using (var context = new OpenMuseumContext())
             {
-                var result = context.BaseLayers.Add(model);
+                var model = context.Tags.Include(x => x.Pages).First(x => x.Id == id);
+
+                return model;
+            }
+        }
+
+        public long Add(Tag model)
+        {
+            using (var context = new OpenMuseumContext())
+            {
+                var result = context.Tags.Add(model);
                 context.Entry(result).State = EntityState.Added;
                 context.SaveChanges();
 
@@ -39,7 +38,7 @@ namespace OpenMuseum.Repositories
             }
         }
 
-        public long Update(BaseLayer model)
+        public long Update(Tag model)
         {
             using (var context = new OpenMuseumContext())
             {
@@ -54,7 +53,7 @@ namespace OpenMuseum.Repositories
         {
             using (var context = new OpenMuseumContext())
             {
-                var model = context.BaseLayers.First(x => x.Id == id);
+                var model = context.Tags.First(x => x.Id == id);
                 context.Entry(model).State = EntityState.Deleted;
                 context.SaveChanges();
             }

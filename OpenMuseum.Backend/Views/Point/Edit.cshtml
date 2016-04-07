@@ -1,20 +1,20 @@
 ﻿@model OpenMuseum.Models.Point
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактировать";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Points</h2>
+        <h2>Точки</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="/">Home</a>
+                <a href="/">Главная</a>
             </li>
             <li>@Html.ActionLink("Points", "Index")</li>
             <li>
-                Edit
+                Редактировать
             </li>
             <li class="active">
                 <strong>@Model.Name</strong>
@@ -26,7 +26,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            @using (Html.BeginForm("Edit", "Point", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Add", "Point", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
             <div class="ibox">
                 <div class="ibox-content">
@@ -74,8 +74,8 @@
                 <div class="ibox-footer">
                     <div class="row">
                         <div class="pull-right">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <a href="@Url.Action("Index")" class="btn btn-default">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
                         </div>
                     </div>
                 </div>

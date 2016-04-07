@@ -11,7 +11,7 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="#">Выход из системы</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -19,19 +19,25 @@
                 </div>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "Home")"><i class="fa fa-laptop"></i> <span class="nav-label">Main page</span> </a>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-laptop"></i> <span class="nav-label">Главная</span> </a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "BaseLayer")"><i class="fa fa-bars"></i> <span class="nav-label">Base layers</span></a>
+                <a href="@Url.Action("Index", "BaseLayer")"><i class="fa fa-bars"></i> <span class="nav-label">Базовые слои</span></a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "Region")"><i class="fa fa-flag"></i> <span class="nav-label">Regions</span></a>
+                <a href="@Url.Action("Index", "DataLayer")"><i class="fa fa-sitemap"></i> <span class="nav-label">Слои данных</span></a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "DataLayer")"><i class="fa fa-sitemap"></i> <span class="nav-label">Data layers</span></a>
+                <a href="@Url.Action("Index", "Region")"><i class="fa fa-flag"></i> <span class="nav-label">Регионы</span></a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "Point")"><i class="fa fa-map-marker"></i> <span class="nav-label">Points</span></a>
+                <a href="@Url.Action("Index", "Page")"><i class="fa fa-pagelines"></i> <span class="nav-label">Страницы</span></a>
+            </li>
+            <li class="@Html.IsSelected(action: "Index")">
+                <a href="@Url.Action("Index", "Tag")"><i class="fa fa-tags"></i> <span class="nav-label">Теги</span></a>
+            </li>
+            <li class="@Html.IsSelected(action: "Index")">
+                <a href="@Url.Action("Index", "Point")"><i class="fa fa-map-marker"></i> <span class="nav-label">Точки</span></a>
             </li>
         </ul>
     </div>

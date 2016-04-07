@@ -1,4 +1,4 @@
-﻿@model OpenMuseum.Models.Point
+﻿@model OpenMuseum.Models.Tag
 
 @{
     ViewBag.Title = Model.Name;
@@ -7,12 +7,12 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Удалить точку</h2>
+        <h2>Тег</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Главная</a>
             </li>
-            <li>@Html.ActionLink("Точки", "Index")</li>
+            <li>@Html.ActionLink("Теги", "Index")</li>
             <li class="active">
                 <strong>@Model.Name</strong>
             </li>
@@ -42,9 +42,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
-                <div class="ibox-title">
-                    <h3>Вы действительно хотите это удалить?</h3>
-                </div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="form-horizontal">
@@ -62,16 +59,51 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
                     <div class="row">
-                        @using (Html.BeginForm())
-                        {
-                            <p>
-                                <input class="btn btn-danger" type="submit" value="Удалить" /> |
-                                @Html.ActionLink("Назад к списку", "Index")
-                            </p>
-                        }
+                        <div class="col-lg-11">
+                            <h3>Страницы</h3>
+                        </div>
                     </div>
                 </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        @if (Model.Pages.Any())
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Название</th>
+                                        <th>Описание</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Pages)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <a href="@Url.Action("Details", "Page", new { id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                                    <a href="@Url.Action("Add", "Page", new { id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                                    <a href="@Url.Action("Delete", "Page", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <p class="text-center lead">No Слой данныхs defined for this base layer</p>
+                        }
+                    </div>
             </div>
         </div>
     </div>

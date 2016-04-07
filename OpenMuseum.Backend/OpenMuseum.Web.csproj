@@ -187,6 +187,8 @@
     <Compile Include="Controllers\API\DataLayersController.cs" />
     <Compile Include="Controllers\MVC\AccountController.cs" />
     <Compile Include="Controllers\MVC\BaseLayerController.cs" />
+    <Compile Include="Controllers\MVC\TagController.cs" />
+    <Compile Include="Controllers\MVC\PageController.cs" />
     <Compile Include="Controllers\MVC\RegionController.cs" />
     <Compile Include="Controllers\MVC\PointController.cs" />
     <Compile Include="Controllers\MVC\DataLayerController.cs" />
@@ -204,6 +206,8 @@
     <Compile Include="Models\BaseLayerViewModel.cs" />
     <Compile Include="Models\DataLayerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\TagViewModel.cs" />
+    <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\PointViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +217,7 @@
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\local.css" />
     <Content Include="Content\patterns\congruent_pentagon.png" />
     <Content Include="Content\patterns\header-profile-skin-1.png" />
     <Content Include="Content\patterns\header-profile-skin-2.png" />
@@ -222,7 +227,6 @@
     <Content Include="Content\patterns\shattered.png" />
     <Content Include="Content\patterns\triangular.png" />
     <Content Include="Content\style.css" />
-    <Content Include="Public\base.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -267,8 +271,7 @@
     <Content Include="fonts\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
-    <Content Include="App_Data\paris1550.zip" />
-    <None Include="Properties\PublishProfiles\HostDemo.pubxml" />
+    <Content Include="App_Data\paris1590.zip" />
     <None Include="Properties\PublishProfiles\sarkrepost.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -328,8 +331,20 @@
     <Content Include="Views\Region\Details.cshtml" />
     <Content Include="Views\Region\Edit.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\Page\Add.cshtml" />
+    <Content Include="Views\Page\Delete.cshtml" />
+    <Content Include="Views\Page\Details.cshtml" />
+    <Content Include="Views\Page\Edit.cshtml" />
+    <Content Include="Views\Page\Index.cshtml" />
+    <Content Include="Views\Tag\Add.cshtml" />
+    <Content Include="Views\Tag\Delete.cshtml" />
+    <Content Include="Views\Tag\Details.cshtml" />
+    <Content Include="Views\Tag\Edit.cshtml" />
+    <Content Include="Views\Tag\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Public\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

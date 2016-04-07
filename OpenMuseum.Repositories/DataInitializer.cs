@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.IO;
 using System.IO.Compression;
 using OpenMuseum.Models;
+using System.Collections.Generic;
 
 namespace OpenMuseum.Repositories
 {
@@ -21,8 +22,8 @@ namespace OpenMuseum.Repositories
             var baseLayer = new BaseLayer
             {
                 Id = 1,
-                Name = "Modern Saratov",
-                Description = "Modern saratov layer",
+                Name = "Современный Саратов",
+                Description = "Отрисованная вручную современная карта Саратова",
                 UniqId = uniqId,
                 Url = "http://sarkrepost.azurewebsites.net/Public/" + uniqId + "/{z}/{x}/{y}.png",
                 Default = true,
@@ -32,38 +33,97 @@ namespace OpenMuseum.Repositories
 
             context.BaseLayers.Add(baseLayer);
 
-            var dataLayer = new DataLayer
+            var archLayer = new DataLayer
             {
                 Id = 1,
                 BaseLayerId = 1,
-                Name = "Architecture",
-                Description = "Architecture layer"
+                Name = "Архитектура",
+                Description = "Слой памятников архитектуры"
             };
 
-            context.DataLayers.Add(dataLayer);
+            context.DataLayers.Add(archLayer);
+
+            var religionLayer = new DataLayer
+            {
+                Id = 2,
+                BaseLayerId = 1,
+                Name = "Церкви",
+                Description = "Слой религиозных объектов"
+            };
+
+            context.DataLayers.Add(religionLayer);
+
+            var monumentLayer = new DataLayer
+            {
+                Id = 3,
+                BaseLayerId = 1,
+                Name = "Памятники",
+                Description = "Слой памятников"
+            };
+
+            context.DataLayers.Add(monumentLayer);
+
+
+            var regionPage = new Page
+            {
+                Id = 1,
+                Name = "Страница: Музейная площадь",
+                Content = "<b>Музейная площадь</b>"
+            };
+
+            context.Pages.Add(regionPage);
+
+            var region = new Region
+            {
+                Name = "Музейная площадь",
+                Description = "Самый старый квартал Саратова",
+                Coordinates = "",
+                BaseLayerId = 1,
+                Page = regionPage
+            };
+
+            context.Regions.Add(region);
 
             var point = new Point
             {
                 Id = 1,
-                DataLayerId = 1,
-                Name = "Eufel tower",
-                Content = "<b>tower</b>",
+                DataLayers = new List<DataLayer>() { archLayer, religionLayer },
+                Name = "Троицкий собор",
+                Description = "Старейшая церковь Саратова",
                 Latitude = 2400,
-                Longitude = 3000
+                Longitude = 3000,
+                Region = region
             };
 
             context.Points.Add(point);
 
-            var region = new Region
+            var tag1 = new Tag
             {
-                Name = "Museum square",
-                Description = "Museum square description",
-                Content = "<b>tower</b>",
-                Coordinates = "",
-                BaseLayerId = 1
+                Id = 1,
+                Name = "Церкви",
             };
 
-            context.Regions.Add(region);
+            context.Tags.Add(tag1);
+
+            var tag2 = new Tag
+            {
+                Id = 2,
+                Name = "Классицизм",
+            };
+
+            context.Tags.Add(tag2);
+
+            var page = new Page
+            {
+                Id = 1,
+                Tags = new List<Tag>() { tag1, tag2 },
+                Name = "Страница: Троицкий собор",
+                Content = "<b>Троицкий собор</b>",
+                Point = point
+            };
+
+            context.Pages.Add(page);
+
 
             context.SaveChanges();
         }

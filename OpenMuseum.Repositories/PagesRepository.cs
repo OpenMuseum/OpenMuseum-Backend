@@ -1,37 +1,36 @@
-﻿using OpenMuseum.Backend.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenMuseum.Models;
 
 namespace OpenMuseum.Repositories
 {
-    public class BaseLayersRepository
+    public class PagesRepository
     {
-        public IEnumerable<BaseLayer> GetAll(out IDisposable context)
+        public IEnumerable<Page> GetAll(out IDisposable context)
         {
             var db = new OpenMuseumContext();
             context = db;
- 
-            return db.BaseLayers.Include(x => x.DataLayers).Include(x => x.Regions);
+
+            return db.Pages.Include(x => x.Tags).Include(x => x.Region).Include(x => x.Point);
         }
 
-        public BaseLayer GetById(long id)
-        {
-            var context = new OpenMuseumContext();
-            var model = context.BaseLayers.Include(x => x.DataLayers).Include(x => x.Regions).First(x => x.Id == id);
-
-            return model;
-        }
-
-        public long Add(BaseLayer model)
+        public Page GetById(long id)
         {
             using (var context = new OpenMuseumContext())
             {
-                var result = context.BaseLayers.Add(model);
+                var model = context.Pages.Include(x => x.Tags).Include(x => x.Region).Include(x => x.Point).First(x => x.Id == id);
+
+                return model;
+            }
+        }
+
+        public long Add(Page model)
+        {
+            using (var context = new OpenMuseumContext())
+            {
+                var result = context.Pages.Add(model);
                 context.Entry(result).State = EntityState.Added;
                 context.SaveChanges();
 
@@ -39,7 +38,7 @@ namespace OpenMuseum.Repositories
             }
         }
 
-        public long Update(BaseLayer model)
+        public long Update(Page model)
         {
             using (var context = new OpenMuseumContext())
             {
@@ -54,7 +53,7 @@ namespace OpenMuseum.Repositories
         {
             using (var context = new OpenMuseumContext())
             {
-                var model = context.BaseLayers.First(x => x.Id == id);
+                var model = context.Pages.First(x => x.Id == id);
                 context.Entry(model).State = EntityState.Deleted;
                 context.SaveChanges();
             }

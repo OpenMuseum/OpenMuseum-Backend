@@ -6,13 +6,13 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Points</h2>
+        <h2>Точки</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="/">Home</a>
+                <a href="/">Главная</a>
             </li>
             <li class="active">
-                <strong>Points</strong>
+                <strong>Точки</strong>
             </li>
         </ol>
     </div>
@@ -41,9 +41,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Description</td>
-                                <td>Data layer</td>
+                                <td>Название</td>
+                                <td>Описание</td>
+                                <td>Слой данных</td>
                                 <td></td>
                             </tr>
                         </thead>
@@ -56,9 +56,9 @@
                                     <td>@item.DataLayerName</td>
                                     <td>
                                         <div class="pull-right">
-                                            <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                            <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
-                                            <a href="@Url.Action("Delete", new {id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                            <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                            <a href="@Url.Action("Add", new {id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                            <a href="@Url.Action("Delete", new {id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

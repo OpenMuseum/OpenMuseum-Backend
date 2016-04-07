@@ -1,4 +1,4 @@
-﻿@model OpenMuseum.Models.BaseLayer
+﻿@model OpenMuseum.Models.Region
 
 @{
     ViewBag.Title = Model.Name;
@@ -7,12 +7,15 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Удалить базовый слой</h2>
+        <h2>Удалить страницу</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Главная</a>
             </li>
-            <li>@Html.ActionLink("Базовые слои", "Index")</li>
+            <li>@Html.ActionLink("Страницы", "Index")</li>
+            <li>
+                Удалить
+            </li>
             <li class="active">
                 <strong>@Model.Name</strong>
             </li>
@@ -28,7 +31,7 @@
                         <a href="@Url.Action("Add")" title="Добавить" class="btn btn-primary btn-circle">
                             <i class="fa fa-plus"></i>
                         </a>
-                        <a href="@Url.Action("Edit", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
+                        <a href="@Url.Action("Add", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
                             <i class="fa fa-edit"></i>
                         </a>
                     </h2>

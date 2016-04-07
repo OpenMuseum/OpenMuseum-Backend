@@ -21,8 +21,6 @@ namespace OpenMuseum.Backend.Models
             Content = point.Content;
             Latitude = point.Longitude;
             Longitude = point.Longitude;
-            DataLayerId = point.DataLayerId;
-            DataLayerName = point.DataLayer.Name;
         }
     }
 }

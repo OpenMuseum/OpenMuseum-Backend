@@ -5,9 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>INSPINIA | @ViewBag.Title</title>
+    <title>@ViewBag.Title | Саратовская крепость</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 </head>
 <body>
 
@@ -41,6 +42,7 @@
     @Scripts.Render("~/plugins/pace")
     @Scripts.Render("~/plugins/slimScroll")
     @Scripts.Render("~/bundles/inspinia")
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

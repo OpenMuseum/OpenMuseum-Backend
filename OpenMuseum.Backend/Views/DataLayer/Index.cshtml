@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<OpenMuseum.Backend.Models.DataLayerViewModel>
 @{
-    ViewBag.Title = "Data layers";
+    ViewBag.Title = "Слои данных";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Data layers</h2>
+        <h2>Слой данных</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="/">Home</a>
+                <a href="/">Главная</a>
             </li>
             <li class="active">
-                <strong>Data layers</strong>
+                <strong>Слой данных</strong>
             </li>
         </ol>
     </div>
@@ -41,10 +41,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Base layer</th>
-                                <th>Points</th>
+                                <th>Название</th>
+                                <th>Описание</th>
+                                <th>Базовый слой</th>
+                                <th>Точки</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -58,11 +58,11 @@
                                     <td>@item.Points.Count</td>
                                     <td>
                                         <div class="pull-right">
-                                            <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                            <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+                                            <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                            <a href="@Url.Action("Add", new {id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
                                             @if (!item.Points.Any())
                                             {
-                                                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                             }
                                         </div>
                                     </td>

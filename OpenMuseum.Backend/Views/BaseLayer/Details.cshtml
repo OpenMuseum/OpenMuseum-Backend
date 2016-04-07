@@ -7,12 +7,12 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Base layer @Model.Name</h2>
+        <h2>Базовый слой @Model.Name</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="/">Home</a>
+                <a href="/">Главная</a>
             </li>
-            <li>@Html.ActionLink("Base layers", "Index")</li>
+            <li>@Html.ActionLink("Базовые слои", "Index")</li>
             <li class="active">
                 <strong>@Model.Name</strong>
             </li>
@@ -25,10 +25,10 @@
             <div class="col-lg-4 col-sm-4">
                 <div class="pull-right">
                     <h2>
-                        <a href="@Url.Action("Add")" title="Add" class="btn btn-primary btn-circle">
+                        <a href="@Url.Action("Add")" title="Добавить" class="btn btn-primary btn-circle">
                             <i class="fa fa-plus"></i>
                         </a>
-                        <a href="@Url.Action("Edit", new {id = Model.Id })" title="Edit" class="btn btn-primary btn-circle">
+                        <a href="@Url.Action("Edit", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
                             <i class="fa fa-edit"></i>
                         </a>
                     </h2>
@@ -71,7 +71,7 @@
                 <div class="ibox-title">
                     <div class="row">
                         <div class="col-lg-11">
-                            <h3>Data Layers</h3>
+                            <h3>Слои данных</h3>
                         </div>
                         <div class="col-lg-1">
                             <a href="@Url.Action("Add", "DataLayer")" class="btn btn-circle btn-primary"><i class="fa fa-plus"></i></a>
@@ -85,8 +85,8 @@
                             <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
+                                    <th>Название</th>
+                                    <th>Описание</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -98,9 +98,9 @@
                                         <td>@item.Description</td>
                                         <td>
                                             <div class="pull-right">
-                                                <a href="@Url.Action("Details", "DataLayer", new { id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                                <a href="@Url.Action("Edit", "DataLayer", new { id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a href="@Url.Action("Delete", "DataLayer", new { id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                                <a href="@Url.Action("Details", "DataLayer", new { id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                                <a href="@Url.Action("Edit", "DataLayer", new { id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                                <a href="@Url.Action("Delete", "DataLayer", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -110,7 +110,7 @@
                         }
                         else
                         {
-                            <p class="text-center lead">No data layers defined for this base layer</p>
+                            <p class="text-center lead">Для этого базового слоя не заданы слои данных</p>
                         }
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                 <div class="ibox-title">
                     <div class="row">
                         <div class="col-lg-11">
-                            <h3>Regions</h3>
+                            <h3>Регионы</h3>
                         </div>
                         <div class="col-lg-1">
                             <a href="@Url.Action("Add", "Region")" class="btn btn-circle btn-primary"><i class="fa fa-plus"></i></a>
@@ -128,27 +128,27 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        @if (Model.DataLayers.Any())
+                        @if (Model.Regions.Any())
                         {
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>
+                                        <th>Название</th>
+                                        <th>Описание</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.DataLayers)
+                                    @foreach (var item in Model.Regions)
                                     {
                                         <tr>
                                             <td>@item.Name</td>
                                             <td>@item.Description</td>
                                             <td>
                                                 <div class="pull-right">
-                                                    <a href="@Url.Action("Details", "Region", new { id = item.Id })" class="btn btn-primary" title="Details"><i class="fa fa-eye"></i></a>
-                                                    <a href="@Url.Action("Edit", "Region", new { id = item.Id })" class="btn btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
-                                                    <a href="@Url.Action("Delete", "Region", new { id = item.Id })" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                                                    <a href="@Url.Action("Details", "Region", new { id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                                    <a href="@Url.Action("Edit", "Region", new { id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                                    <a href="@Url.Action("Delete", "Region", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -158,11 +158,44 @@
                         }
                         else
                         {
-                            <p class="text-center lead">No regions defined for this base layer</p>
+                            <p class="text-center lead">Для этого базового слоя не заданы регионы</p>
                         }
                     </div>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <h3>Базовая карта</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="baselayer"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        baselayerMap = L.map('baselayer', {
+            maxZoom: 5,
+            minZoom: 0,
+            center: [50, 50],
+            zoom: 4,
+            noWrap: true,
+            zoomControl: true
+        });
+
+        L.tileLayer('@Model.Url', {
+            crs: L.CRS.Simple,
+            minZoom: 0,
+            maxZoom: 5,
+            continuousWorld: true
+        }).addTo(baselayerMap);
+    </script>
+}
