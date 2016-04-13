@@ -46,6 +46,12 @@
                                 @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers)
                             </div>
                         </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Parent, new { @class = "col-lg-6 col-sm-6 control-label" })
+                            <div class="col-lg-6 col-sm-6">
+                                @Html.DropDownListFor(model => model.ParentId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers)
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="ibox-footer">

@@ -8,7 +8,6 @@ namespace OpenMuseum.Backend.Models.API
         {
             Id = point.Id;
             Name = point.Name;
-            Content = point.Content;
             Latitude = point.Latitude;
             Longitude = point.Longitude;
         }

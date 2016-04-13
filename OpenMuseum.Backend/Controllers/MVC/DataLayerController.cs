@@ -39,7 +39,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
         public ActionResult Add()
         {
             var baseLayersRepository = new BaseLayersRepository();
-            IDisposable context;
+            IDisposable context = null;
 
             ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
@@ -47,10 +47,17 @@ namespace OpenMuseum.Backend.Controllers.MVC
                 Text = x.Name
             });
 
-            using (context)
+            context?.Dispose();
+
+            var dataLayersRepository = new DataLayersRepository();
+            ViewBag.ListOfDataLayers = dataLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
-                return View(new DataLayer());
-            }
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            context?.Dispose();
+            
+            return View(new DataLayer());
         }
 
         // POST: BaseLayers/Create
@@ -82,17 +89,21 @@ namespace OpenMuseum.Backend.Controllers.MVC
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
-
-            using (context)
+            context?.Dispose();
+            
+            var dataLayersRepository = new DataLayersRepository();
+            ViewBag.ListOfDataLayers = dataLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
-                var dataLayersRepository = new DataLayersRepository();
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+            context?.Dispose();
 
-                var model = dataLayersRepository.GetById(id);
+            var model = dataLayersRepository.GetById(id);
 
-                if (model != null)
-                    return View(model);
-                return HttpNotFound();
-            }
+            if (model != null)
+                return View(model);
+            return HttpNotFound();
         }
 
         // POST: BaseLayers/Edit/5

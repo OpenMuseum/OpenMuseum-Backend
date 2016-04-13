@@ -46,6 +46,11 @@ namespace OpenMuseum.Repositories
                 .WithMany( x => x.DataLayers)
                 .HasForeignKey( x => x.BaseLayerId);
 
+            modelBuilder.Entity<DataLayer>()
+                .HasOptional(x => x.Parent)
+                .WithMany(x => x.Children)
+                .HasForeignKey( x => x.ParentId);
+
             modelBuilder.Entity<Region>()
                 .HasRequired(x => x.BaseLayer)
                 .WithMany(x => x.Regions)

@@ -44,6 +44,7 @@
                                 <th>Название</th>
                                 <th>Описание</th>
                                 <th>Базовый слой</th>
+                                <th>Дочерние слои</th>
                                 <th>Точки</th>
                                 <th></th>
                             </tr>
@@ -55,12 +56,13 @@
                                     <td>@item.Name</td>
                                     <td>@item.Description</td>
                                     <td>@item.BaseLayerName</td>
+                                    <td>@item.Children.Count</td>
                                     <td>@item.Points.Count</td>
                                     <td>
                                         <div class="pull-right">
                                             <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
-                                            <a href="@Url.Action("Add", new {id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
-                                            @if (!item.Points.Any())
+                                            <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                            @if (!item.Points.Any() && !item.Children.Any())
                                             {
                                                 <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                             }

@@ -64,6 +64,17 @@ namespace OpenMuseum.Repositories
             context.DataLayers.Add(monumentLayer);
 
 
+            var leninLayer = new DataLayer
+            {
+                Id = 4,
+                BaseLayerId = 1,
+                Name = "Памятники Ленину",
+                Description = "Слой памятников Ленину",
+                ParentId = 3
+            };
+
+            context.DataLayers.Add(leninLayer);
+
             var regionPage = new Page
             {
                 Id = 1,

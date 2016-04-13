@@ -28,7 +28,7 @@
                         <a href="@Url.Action("Add")" title="Добавить" class="btn btn-primary btn-circle">
                             <i class="fa fa-plus"></i>
                         </a>
-                        <a href="@Url.Action("Add", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
+                        <a href="@Url.Action("Edit", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
                             <i class="fa fa-edit"></i>
                         </a>
                     </h2>
@@ -65,6 +65,38 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-content">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Описание</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Children)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <div class="pull-right">
+                                            <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                            <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                            @if (!item.Points.Any())
+                                            {
+                                                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="ibox">
