@@ -65,7 +65,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

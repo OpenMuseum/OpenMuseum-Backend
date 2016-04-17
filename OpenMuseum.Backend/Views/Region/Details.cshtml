@@ -78,10 +78,10 @@
                 <div class="ibox">
                     <div class="ibox-title">
                         <div class="col-lg-11">
-                            <h3>Содержимое присоединённой страницы</h3>
+                            <h3>Содержимое присоединённой страницы (<a href="@Url.Action("Details", "Page", new { id = Model.Page.Id })">@Model.Page.Name</a>)</h3>
                         </div>
                         <div class="col-lg-1">
-                            <a href="@Url.Action("Add", "DataLayer")" class="btn btn-circle btn-primary" title="Сменить"><i class="fa fa-pencil"></i></a>
+                            <a href="@Url.Action("Add", "DataLayer")" class="btn btn-circle btn-primary" title="Сменить"><i class="fa fa-refresh"></i></a>
                         </div>
                     </div>
                     <div class="ibox-content">

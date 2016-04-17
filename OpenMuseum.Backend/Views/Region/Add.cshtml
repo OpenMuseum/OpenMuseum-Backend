@@ -7,7 +7,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Добавть регион</h2>
+        <h2>Добавить регион</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Главная</a>
@@ -37,7 +37,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Description)
+                                @Html.TextAreaFor(model => model.Description)
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers)
+                                @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers, new { @class = "chosen-select" })
                             </div>
                         </div>
                     </div>
@@ -67,3 +67,25 @@
         </div>
     </div>
 </div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+
+    <style type="text/css">
+        .chosen-container.chosen-container-multi .chosen-choices {
+            max-height: 50px;
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/chosen")
+
+    <script>
+        $('.chosen-select').chosen({
+            width: '250px',
+            height: '50px'
+        });
+    </script>
+}

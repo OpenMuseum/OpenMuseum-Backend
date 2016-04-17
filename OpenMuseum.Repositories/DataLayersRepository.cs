@@ -13,13 +13,13 @@ namespace OpenMuseum.Repositories
             var db = new OpenMuseumContext();
             context = db;
 
-            return db.DataLayers.Include(x => x.BaseLayer).Include(x => x.Points).Include(x => x.Children);
+            return db.DataLayers.Include(x => x.BaseLayer).Include(x => x.Points).Include(x => x.Parent).Include(x => x.Children);
         }
 
         public DataLayer GetById(long id)
         {
             var context = new OpenMuseumContext();
-            var model = context.DataLayers.Include(x => x.BaseLayer).Include(x => x.Points).Include(x => x.Children).Include(x => x.Children.Select(y => y.Points)).First(x => x.Id == id);
+            var model = context.DataLayers.Include(x => x.BaseLayer).Include(x => x.Parent).Include(x => x.Points).Include(x => x.Children).Include(x => x.Children.Select(y => y.Points)).First(x => x.Id == id);
 
             return model;
         }

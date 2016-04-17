@@ -38,7 +38,18 @@ namespace OpenMuseum.Backend.Controllers.MVC
         // GET: BaseLayers/Create
         public ActionResult Add()
         {
-            return View(new Point());
+            var regionsRepository = new RegionsRepository();
+            IDisposable context = null;
+
+            ViewBag.ListOfRegions = regionsRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+
+            context?.Dispose();
+
+            return View(new Page());
         }
 
         // POST: BaseLayers/Create
@@ -47,6 +58,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
         {
             try
             {
+
                 var pagesRepository = new PagesRepository();
 
                 pagesRepository.Add(model);

@@ -30,11 +30,17 @@ namespace OpenMuseum.Repositories
         {
             using (var context = new OpenMuseumContext())
             {
-                var result = context.Pages.Add(model);
-                context.Entry(result).State = EntityState.Added;
+                var pointModel = model.Point;
+
+                var pointResult = context.Points.Add(pointModel);
+                context.Entry(pointResult).State = EntityState.Added;
+                model.Point = pointResult;
+
+                var pageResult = context.Pages.Add(model);
+                context.Entry(pageResult).State = EntityState.Added;
                 context.SaveChanges();
 
-                return result.Id;
+                return pageResult.Id;
             }
         }
 

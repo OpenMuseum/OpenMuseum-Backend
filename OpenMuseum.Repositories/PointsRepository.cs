@@ -20,7 +20,7 @@ namespace OpenMuseum.Repositories
         {
             using (var context = new OpenMuseumContext())
             {
-                var model = context.Points.Include(x => x.DataLayers).First(x => x.Id == id);
+                var model = context.Points.Include(x => x.DataLayers).Include(x => x.Region).Include(x => x.Page).First(x => x.Id == id);
 
                 return model;
             }

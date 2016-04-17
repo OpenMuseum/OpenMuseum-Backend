@@ -78,7 +78,7 @@ namespace OpenMuseum.Repositories
             var regionPage = new Page
             {
                 Id = 1,
-                Name = "Страница: Музейная площадь",
+                Name = "Region: Музейная площадь",
                 Content = "<b>Музейная площадь</b>"
             };
 
@@ -86,28 +86,17 @@ namespace OpenMuseum.Repositories
 
             var region = new Region
             {
+                Id = 1,
                 Name = "Музейная площадь",
                 Description = "Самый старый квартал Саратова",
                 Coordinates = "",
-                BaseLayerId = 1,
+                BaseLayer = baseLayer,
                 Page = regionPage
             };
 
             context.Regions.Add(region);
 
-            var point = new Point
-            {
-                Id = 1,
-                DataLayers = new List<DataLayer>() { archLayer, religionLayer },
-                Name = "Троицкий собор",
-                Description = "Старейшая церковь Саратова",
-                Latitude = 2400,
-                Longitude = 3000,
-                Region = region
-            };
-
-            context.Points.Add(point);
-
+            #region Tags
             var tag1 = new Tag
             {
                 Id = 1,
@@ -123,18 +112,31 @@ namespace OpenMuseum.Repositories
             };
 
             context.Tags.Add(tag2);
+            #endregion
 
-            var page = new Page
+            var pointPage = new Page
             {
-                Id = 1,
+                Id = 2,
                 Tags = new List<Tag>() { tag1, tag2 },
                 Name = "Страница: Троицкий собор",
-                Content = "<b>Троицкий собор</b>",
-                Point = point
+                Content = "<b>Троицкий собор</b>"
             };
 
-            context.Pages.Add(page);
+            context.Pages.Add(pointPage);
 
+            var point = new Point
+            {
+                Id = 1,
+                DataLayers = new List<DataLayer>() { archLayer, religionLayer },
+                Name = "Троицкий собор",
+                Description = "Старейшая церковь Саратова",
+                Latitude = 2400,
+                Longitude = 3000,
+                Region = region,
+                Page = pointPage
+            };
+
+            context.Points.Add(point);
 
             context.SaveChanges();
         }

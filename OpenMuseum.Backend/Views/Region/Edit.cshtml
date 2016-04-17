@@ -54,7 +54,7 @@
                          <div class="form-group">
                              @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
                              <div class="col-lg-6 col-sm-6">
-                                 @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers)
+                                 @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers, new { @class = "chosen-select" })
                              </div>
                          </div>
                      </div>
@@ -72,3 +72,25 @@
         </div>
     </div>
 </div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+
+    <style type="text/css">
+        .chosen-container.chosen-container-multi .chosen-choices {
+            max-height: 50px;
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/chosen")
+
+    <script>
+        $('.chosen-select').chosen({
+            width: '250px',
+            height: '50px'
+        });
+    </script>
+}

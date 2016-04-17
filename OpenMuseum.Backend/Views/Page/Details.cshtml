@@ -7,7 +7,7 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
-        <h2>Region</h2>
+        <h2>@Model.Name</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Главная</a>
@@ -58,12 +58,42 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })
+                                <label class="col-lg-6 col-sm-6 control-label">Attached to</label>
                                 <div class="col-lg-6 col-sm-6">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.Content)</p>
+                                    @if (Model.Point != null)
+                                    {
+                                        <p class="form-control-static">Point (<a href="@Url.Action("Details","Page", new { id = Model.Point.Id })">@Model.Point.Name</a>)</p>
+                                    }
+                                    @if (Model.Region != null)
+                                    {
+                                        <p class="form-control-static">Region (<a href="@Url.Action("Details","Region", new { id = Model.Region.Id })">@Model.Region.Name</a>)</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-6 col-sm-6 control-label">Tags</label>
+                                <div class="col-lg-6 col-sm-6">
+                                    <p class="form-control-static">
+                                        @foreach (var tag in Model.Tags)
+                                        {
+                                            <a href="@Url.Action("Details", "Tag", new { id = tag.Id })">
+                                                <span class="label label-info">#@tag.Name</span>
+                                            </a>
+                                        }
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h3>Page content</h3>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        @Html.Raw(Model.Content)
                     </div>
                 </div>
             </div>

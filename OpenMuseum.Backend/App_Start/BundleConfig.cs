@@ -8,9 +8,6 @@ namespace OpenMuseum.Backend
 
         public static void RegisterBundles(BundleCollection bundles)
         {
-
-
-
             // Vendor scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-2.1.1.min.js"));
@@ -46,6 +43,15 @@ namespace OpenMuseum.Backend
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
                       "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+
+            // chosen 
+            bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
+                      "~/Scripts/plugins/chosen.jquery.min.js"));
+
+            // chosen styles
+            bundles.Add(new StyleBundle("~/Content/plugins/chosen/chosenStyles").Include(
+                      "~/Content/plugins/chosen/chosen.min.css", new CssRewriteUrlTransform()));
+
 
         }
     }

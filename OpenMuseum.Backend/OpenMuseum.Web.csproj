@@ -226,6 +226,9 @@
     <Content Include="Content\patterns\otis_redding.png" />
     <Content Include="Content\patterns\shattered.png" />
     <Content Include="Content\patterns\triangular.png" />
+    <Content Include="Content\plugins\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\plugins\chosen\chosen-sprite.png" />
+    <Content Include="Content\plugins\chosen\chosen.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
@@ -282,6 +285,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\plugins\chosen.jquery.min.js" />
     <Content Include="Scripts\plugins\metisMenu\metisMenu.min.js" />
     <Content Include="Scripts\plugins\pace\pace.min.js" />
     <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />
@@ -341,6 +345,7 @@
     <Content Include="Views\Tag\Details.cshtml" />
     <Content Include="Views\Tag\Edit.cshtml" />
     <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Point.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Public\" />

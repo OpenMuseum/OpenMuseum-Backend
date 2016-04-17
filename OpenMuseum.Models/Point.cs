@@ -9,7 +9,6 @@ namespace OpenMuseum.Models
         public string Description { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public long PageId { get; set; }
         public long? RegionId { get; set; }
         
         public virtual Page Page { get; set; }

@@ -28,13 +28,15 @@ namespace OpenMuseum.Repositories
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Entity<Point>()
-                .HasRequired(x => x.Page)
-                .WithOptional(x => x.Point);
+            modelBuilder.Entity<Page>()
+                .HasOptional(o => o.Region)
+                .WithOptionalPrincipal()
+                .Map(o => o.MapKey("PageId"));
 
-            modelBuilder.Entity<Region>()
-                .HasOptional(x => x.Page)
-                .WithOptionalPrincipal(x => x.Region);
+            modelBuilder.Entity<Page>()
+                .HasOptional(o => o.Point)
+                .WithOptionalPrincipal()
+                .Map(o => o.MapKey("PageId"));
 
             modelBuilder.Entity<Point>()
                 .HasOptional(x => x.Region)

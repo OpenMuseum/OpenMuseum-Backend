@@ -25,45 +25,71 @@
         <div class="col-lg-12">
             @using (Html.BeginForm("Add", "DataLayer", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-            <div class="ibox">
-                <div class="ibox-content">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Name, new {@class= "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Name)
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, new { @class = "col-lg-6 col-sm-6 control-label" })
+                                <div class="col-lg-6 col-sm-6">
+                                    @Html.TextBoxFor(model => model.Name)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
+                                <div class="col-lg-6 col-sm-6">
+                                    @Html.TextAreaFor(model => model.Description)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
+                                <div class="col-lg-6 col-sm-6">
+                                    <p class="form-control-static">
+                                        @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers, new { @class = "chosen-select" })
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Parent, new { @class = "col-lg-6 col-sm-6 control-label" })
+                                <div class="col-lg-6 col-sm-6">
+                                    <p class="form-control-static">
+                                        @Html.DropDownListFor(model => model.ParentId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers, new { @class = "chosen-select" })
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextAreaFor(model => model.Description)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Parent, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.ParentId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers)
+                    </div>
+                    <div class="ibox-footer">
+                        <div class="row">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ibox-footer">
-                    <div class="row">
-                        <div class="pull-right">
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
-                            <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-}
+            }
         </div>
     </div>
 </div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+
+    <style type="text/css">
+        .chosen-container.chosen-container-multi .chosen-choices {
+            max-height: 50px;
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/chosen")
+
+    <script>
+        $('.chosen-select').chosen({
+            width: '250px',
+            height: '50px'
+        });
+    </script>
+}

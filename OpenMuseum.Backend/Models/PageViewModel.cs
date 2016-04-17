@@ -25,9 +25,9 @@ namespace OpenMuseum.Backend.Models
             Description = page.Description;
             Content = page.Content;
             ExternalId = page.ExternalId;
-            PointId = page.PointId;
+            PointId = page.Point?.Id;
             PointName = page.Point?.Name;
-            RegionId = page.RegionId;
+            RegionId = page.Region?.Id;
             RegionName = page.Region?.Name;
             if (page.Tags != null)
                 Tags = page.Tags.Select(x => new TagViewModel(x)).ToList();

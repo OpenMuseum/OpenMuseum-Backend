@@ -27,6 +27,7 @@
             {
             <div class="ibox">
                 <div class="ibox-content">
+
                     <div class="form-horizontal">
                         <div class="form-group">
                             @Html.LabelFor(model => model.Name, new {@class= "col-lg-6 col-sm-6 control-label" })
@@ -37,15 +38,22 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Description)
+                                @Html.TextAreaFor(model => model.Description)
                             </div>
                         </div>
+                    </div>
+                    @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })<br/>
+                    @Html.TextAreaFor(model => model.Content)
+                    <div class="form-horizontal">
+                        <p class="lead">Attach to region</p>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })
+                            @Html.LabelFor(model => model.Region, new { @class = "col-lg-6 col-sm-6 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.TextAreaFor(model => model.Content)
+                                @Html.DropDownListFor(model => model.RegionId, (IEnumerable<SelectListItem>)ViewBag.ListOfRegions)
                             </div>
                         </div>
+                        <p class="lead">Attach to point</p>
+                        @Html.EditorFor(model => model.Point)
                     </div>
                 </div>
                 <div class="ibox-footer">
