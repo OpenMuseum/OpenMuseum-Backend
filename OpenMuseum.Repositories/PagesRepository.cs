@@ -13,14 +13,14 @@ namespace OpenMuseum.Repositories
             var db = new OpenMuseumContext();
             context = db;
 
-            return db.Pages.Include(x => x.Tags).Include(x => x.Region).Include(x => x.Point);
+            return db.Pages.Include(x => x.Tags);
         }
 
         public Page GetById(long id)
         {
             using (var context = new OpenMuseumContext())
             {
-                var model = context.Pages.Include(x => x.Tags).Include(x => x.Region).Include(x => x.Point).First(x => x.Id == id);
+                var model = context.Pages.Include(x => x.Tags).First(x => x.Id == id);
 
                 return model;
             }
@@ -30,17 +30,17 @@ namespace OpenMuseum.Repositories
         {
             using (var context = new OpenMuseumContext())
             {
-                var pointModel = model.Point;
+             //   var pointModel = model.Point;
 
-                var pointResult = context.Points.Add(pointModel);
-                context.Entry(pointResult).State = EntityState.Added;
-                model.Point = pointResult;
+             //   var pointResult = context.Points.Add(pointModel);
+             //   context.Entry(pointResult).State = EntityState.Added;
+             //   model.Point = pointResult;
 
-                var pageResult = context.Pages.Add(model);
-                context.Entry(pageResult).State = EntityState.Added;
-                context.SaveChanges();
+             //   var pageResult = context.Pages.Add(model);
+             //   context.Entry(pageResult).State = EntityState.Added;
+            //    context.SaveChanges();
 
-                return pageResult.Id;
+                return 1;
             }
         }
 

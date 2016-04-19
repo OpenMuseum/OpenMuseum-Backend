@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenMuseum.Models
 {
@@ -10,6 +11,8 @@ namespace OpenMuseum.Models
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public long? RegionId { get; set; }
+        [ForeignKey("Page")]
+        public long? PageId { get; set; }
         
         public virtual Page Page { get; set; }
         public virtual Region Region { get; set; }

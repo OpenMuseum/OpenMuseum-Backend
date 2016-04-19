@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenMuseum.Models
 {
@@ -9,6 +10,8 @@ namespace OpenMuseum.Models
         public string Description { get; set; }
         public string Coordinates { get; set; }
         public long BaseLayerId { get; set; }
+        [ForeignKey("Page")]
+        public long? PageId { get; set; }
 
         public virtual BaseLayer BaseLayer { get; set; }
         public virtual Page Page { get; set; }
