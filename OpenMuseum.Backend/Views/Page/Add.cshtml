@@ -1,4 +1,4 @@
-﻿@model OpenMuseum.Models.Page
+﻿@model OpenMuseum.Backend.Models.PageViewModel
 
 @{
     ViewBag.Title = "Добавить страницу";
@@ -27,33 +27,67 @@
             {
             <div class="ibox">
                 <div class="ibox-content">
-
                     <div class="form-horizontal">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Name, new {@class= "col-lg-6 col-sm-6 control-label" })
+                            @Html.LabelFor(model => model.Name, new {@class= "col-lg-2 col-sm-2 control-label" })
                             <div class="col-lg-6 col-sm-6">
                                 @Html.TextBoxFor(model => model.Name)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextAreaFor(model => model.Description)
+                            @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
+                            <div class="col-lg-10 col-sm-10">
+                                @Html.TextAreaFor(model => model.Description, new { rows = "5", @class = "form-control" })
                             </div>
                         </div>
                     </div>
-                    @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })<br/>
-                    @Html.TextAreaFor(model => model.Content)
+
                     <div class="form-horizontal">
-                        <p class="lead">Attach to region</p>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Region, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.RegionId, (IEnumerable<SelectListItem>)ViewBag.ListOfRegions)
+                            @Html.LabelFor(model => model.Content, new { @class = "m-l-md" })
+                            <div class="col-lg-12 col-sm-12">
+                                @Html.TextAreaFor(model => model.Content)
                             </div>
                         </div>
-                        <p class="lead">Attach to point</p>
-                        @Html.EditorFor(model => model.Point)
+                    </div>
+
+                    <p class="lead">Прикрепить к</p>
+                    <div class="tabs-container">
+                        <div class="tabs-left">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#point" aria-expanded="true">Точка</a></li>
+                                <li class=""><a data-toggle="tab" href="#region" aria-expanded="false">Регион</a></li>
+                            </ul>
+                            <div class="tab-content ">
+                                <div id="point" class="tab-pane active">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-horizontal">
+                                                    @Html.EditorFor(model => model.Point)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="region" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Region, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                                        <div class="col-lg-4 col-sm-4">
+                                                            @Html.DropDownListFor(model => model.RegionId, (IEnumerable<SelectListItem>)ViewBag.ListOfRegions, "--Выберите регион--", new { @class = "chosen-select" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="ibox-footer">
@@ -69,3 +103,33 @@
         </div>
     </div>
 </div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    <style type="text/css">
+        .chosen-container.chosen-container-multi .chosen-choices {
+            max-height: 50px;
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/chosen")
+
+    <script>
+        $(document).ready(function() {
+            $('#Content').summernote({
+                height: 300,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: false                  // set focus to editable area after initializing summernote
+            });
+
+            $('.chosen-select').chosen({
+                width: '250px',
+                height: '50px'
+            });
+        });
+    </script>
+}

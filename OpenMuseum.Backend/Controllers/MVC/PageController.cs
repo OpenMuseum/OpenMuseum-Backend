@@ -26,11 +26,16 @@ namespace OpenMuseum.Backend.Controllers.MVC
         public ActionResult Details(long id)
         {
             var pagesRepository = new PagesRepository();
+            var pointsRepository = new PointsRepository();
+            var regionsRepository = new RegionsRepository();
 
             var model = pagesRepository.GetById(id);
 
+            var point = pointsRepository.GetByPage(id);
+            var region = regionsRepository.GetByPage(id);
+
             if (model != null)
-                return View(model);
+                return View(new PageViewModel(model, point, region));
             else
                 return HttpNotFound();
         }
@@ -49,19 +54,31 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
             context?.Dispose();
 
-            return View(new Page());
+            return View(new PageViewModel(new Page()));
         }
 
         // POST: BaseLayers/Create
         [HttpPost]
-        public ActionResult Add(Page model)
+        [ValidateInput(false)]
+        public ActionResult Add(PageViewModel model)
         {
             try
             {
-
                 var pagesRepository = new PagesRepository();
+                var pointsRepository = new PointsRepository();
 
-                pagesRepository.Add(model);
+                var page = new Page()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Content = model.Content,
+                    ExternalId = model.ExternalId
+                };
+
+                var pageId = pagesRepository.Add(page);
+                model.Point.PageId = pageId;
+
+                pointsRepository.Add(model.Point);
 
                 return RedirectToAction("Index");
             }
@@ -85,6 +102,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
         // POST: BaseLayers/Edit/5
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(Page model)
         {
             try

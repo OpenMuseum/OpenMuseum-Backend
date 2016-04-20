@@ -1,3 +1,7 @@
 ﻿#baselayer { 
     height: 600px; 
 }
+
+textarea.form-control {
+    width: 100%;
+}

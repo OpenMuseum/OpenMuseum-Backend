@@ -29,12 +29,10 @@ namespace OpenMuseum.Repositories
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<Region>()
-                .HasOptional(o => o.Page)
-                .WithOptionalPrincipal(x => x.Region);
+                .HasOptional(o => o.Page);
 
             modelBuilder.Entity<Point>()
-                .HasOptional(o => o.Page)
-                .WithOptionalPrincipal(x => x.Point);
+                .HasOptional(o => o.Page);
 
             modelBuilder.Entity<Point>()
                 .HasOptional(x => x.Region)
