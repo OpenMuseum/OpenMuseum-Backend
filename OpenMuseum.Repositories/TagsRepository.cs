@@ -58,5 +58,13 @@ namespace OpenMuseum.Repositories
                 context.SaveChanges();
             }
         }
+
+        public List<Tag> GetByStringIds(string[] selectedTags)
+        {
+                using (var context = new OpenMuseumContext())
+                {
+                   return context.Tags.Where(x => selectedTags.Contains(x.Id.ToString())).ToList();
+                }
+            }
     }
 }

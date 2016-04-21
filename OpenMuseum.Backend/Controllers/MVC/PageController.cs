@@ -94,22 +94,43 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var pagesRepository = new PagesRepository();
 
             var model = pagesRepository.GetById(id);
+            
+            var tagsRepository = new TagsRepository();
+            IDisposable context = null;
+
+            ViewBag.ListOfTags = tagsRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+
+            context?.Dispose();
 
             if (model != null)
-                return View(model);
+                return View(new EditPageViewModel(model));
             return HttpNotFound();
         }
 
         // POST: BaseLayers/Edit/5
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(Page model)
+        public ActionResult Edit(EditPageViewModel model)
         {
             try
             {
-                var pagesRepository = new PagesRepository();
+                var tagsRepository = new TagsRepository();
+                var tags = tagsRepository.GetByStringIds(model.SelectedTags);
 
-                pagesRepository.Update(model);
+                var pagesRepository = new PagesRepository();
+                var originalPage = pagesRepository.GetById(model.Id);
+
+                originalPage.Name = model.Name;
+                originalPage.Description = model.Description;
+                originalPage.Content = model.Content;
+                originalPage.ExternalId = model.ExternalId;
+                originalPage.Tags = tags;
+
+                pagesRepository.Update(originalPage);
 
                 return RedirectToAction("Index");
             }

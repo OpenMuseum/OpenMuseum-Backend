@@ -1,4 +1,4 @@
-﻿@model OpenMuseum.Models.Region
+﻿@model  OpenMuseum.Backend.Models.EditPageViewModel
 
 @{
     ViewBag.Title = "Редактировать";
@@ -26,23 +26,39 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
-            @using (Html.BeginForm("Add", "Region", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Edit", "Page", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
             <div class="ibox">
                 <div class="ibox-content">
                      <div class="form-horizontal">
                          @Html.HiddenFor(model => model.Id)
 
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Name, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.TextBoxFor(model => model.Name)
+                         <div class="form-horizontal">
+                             <div class="form-group">
+                                 @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                 <div class="col-lg-6 col-sm-6">
+                                     @Html.TextBoxFor(model => model.Name)
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                 <div class="col-lg-10 col-sm-10">
+                                     @Html.TextAreaFor(model => model.Description, new { rows = "5", @class = "form-control" })
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 @Html.LabelFor(model => model.Tags, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                 <div class="col-lg-10 col-sm-10">
+                                     @Html.DropDownListFor(model => model.SelectedTags, (IEnumerable<SelectListItem>)ViewBag.ListOfTags, "--Выберите регион--", new { @class = "chosen-select", multiple = "multiple" })
+                                 </div>
                              </div>
                          </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.TextBoxFor(model => model.Description)
+                         <div class="form-horizontal">
+                             <div class="form-group">
+                                 @Html.LabelFor(model => model.Content, new { @class = "m-l-md" })
+                                 <div class="col-lg-12 col-sm-12">
+                                     @Html.TextAreaFor(model => model.Content)
+                                 </div>
                              </div>
                          </div>
                      </div>
@@ -60,3 +76,33 @@
         </div>
     </div>
 </div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    <style type="text/css">
+        .chosen-container.chosen-container-multi .chosen-choices {
+            max-height: 50px;
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/chosen")
+
+    <script>
+        $(document).ready(function() {
+            $('#Content').summernote({
+                height: 300,                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: false                  // set focus to editable area after initializing summernote
+            });
+
+            $('.chosen-select').chosen({
+                width: '250px',
+                height: '50px'
+            });
+        });
+    </script>
+}

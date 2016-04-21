@@ -62,11 +62,11 @@
                                 <div class="col-lg-6 col-sm-6">
                                     @if (Model.PointId.HasValue)
                                     {
-                                        <p class="form-control-static">Точка (<a href="@Url.Action("Details","Point", new { id = Model.PointId.Value })">@Model.PointName</a>)</p>
+                                        <p class="form-control-static">Точка (<a href="@Url.Action("Details","Point", new { id = Model.PointId.Value })">@Model.PointName</a>) <a href="@Url.Action("ChangeAttach","Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Change attach</a></p>
                                     }
                                     @if (Model.RegionId.HasValue)
                                     {
-                                        <p class="form-control-static">Регион (<a href="@Url.Action("Details","Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>)</p>
+                                        <p class="form-control-static">Регион (<a href="@Url.Action("Details","Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>) <a href="@Url.Action("ChangeAttach","Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Change attach</a></p>
                                     }
                                 </div>
                             </div>
