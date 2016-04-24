@@ -31,13 +31,13 @@
                 <a href="@Url.Action("Index", "Region")"><i class="fa fa-flag"></i> <span class="nav-label">Регионы</span></a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
+                <a href="@Url.Action("Index", "Point")"><i class="fa fa-map-marker"></i> <span class="nav-label">Точки</span></a>
+            </li>
+            <li class="@Html.IsSelected(action: "Index")">
                 <a href="@Url.Action("Index", "Page")"><i class="fa fa-pagelines"></i> <span class="nav-label">Страницы</span></a>
             </li>
             <li class="@Html.IsSelected(action: "Index")">
                 <a href="@Url.Action("Index", "Tag")"><i class="fa fa-tags"></i> <span class="nav-label">Теги</span></a>
-            </li>
-            <li class="@Html.IsSelected(action: "Index")">
-                <a href="@Url.Action("Index", "Point")"><i class="fa fa-map-marker"></i> <span class="nav-label">Точки</span></a>
             </li>
         </ul>
     </div>

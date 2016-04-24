@@ -17,5 +17,7 @@ namespace OpenMuseum.Models
         public virtual Page Page { get; set; }
         public virtual Region Region { get; set; }
         public virtual ICollection<DataLayer> DataLayers { get; set; }
+
+        public Point(){ }
     }
 }

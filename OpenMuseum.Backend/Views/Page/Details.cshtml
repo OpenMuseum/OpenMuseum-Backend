@@ -1,10 +1,8 @@
 ﻿@model OpenMuseum.Backend.Models.PageViewModel
-
 @{
     ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
         <h2>@Model.Name</h2>
@@ -25,11 +23,11 @@
             <div class="col-lg-4 col-sm-4">
                 <div class="pull-right">
                     <h2>
-                        <a href="@Url.Action("Add")" title="Добавить" class="btn btn-primary btn-circle">
-                            <i class="fa fa-plus"></i>
-                        </a>
                         <a href="@Url.Action("Edit", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
                             <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", new {id = Model.Id })" class="btn btn-danger btn-circle" title="Удалить">
+                            <i class="fa fa-trash"></i>
                         </a>
                     </h2>
                 </div>
@@ -37,7 +35,6 @@
         </div>
     </div>
 </div>
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -57,19 +54,40 @@
                                     <p class="form-control-static">@Html.DisplayFor(model => model.Description)</p>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-lg-6 col-sm-6 control-label">Прикреплено к</label>
-                                <div class="col-lg-6 col-sm-6">
-                                    @if (Model.PointId.HasValue)
-                                    {
-                                        <p class="form-control-static">Точка (<a href="@Url.Action("Details","Point", new { id = Model.PointId.Value })">@Model.PointName</a>) <a href="@Url.Action("ChangeAttach","Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Change attach</a></p>
-                                    }
-                                    @if (Model.RegionId.HasValue)
-                                    {
-                                        <p class="form-control-static">Регион (<a href="@Url.Action("Details","Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>) <a href="@Url.Action("ChangeAttach","Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Change attach</a></p>
-                                    }
+                            @if (Model.PointId.HasValue || Model.RegionId.HasValue)
+                            {
+                                <div class="form-group">
+                                    <label class="col-lg-6 col-sm-6 control-label">Прикреплено к</label>
+                                    <div class="col-lg-6 col-sm-6">
+                                        @if (Model.PointId.HasValue)
+                                        {
+                                            <p class="form-control-static">Точка (<a href="@Url.Action("Details", "Point", new { id = Model.PointId.Value })">@Model.PointName</a>) <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Сменить привязку</a></p>
+                                        }
+                                        @if (Model.RegionId.HasValue)
+                                        {
+                                            <p class="form-control-static">Регион (<a href="@Url.Action("Details", "Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>) <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Сменить привязку</a></p>
+                                        }
+                                        @if (!Model.PointId.HasValue && !Model.RegionId.HasValue)
+                                        {
+                                            <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Привязать</a>
+                                        }
+                                    </div>
                                 </div>
-                            </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <label class="col-lg-6 col-sm-6 control-label">Прикреплено к</label>
+                                    <div class="col-lg-6 col-sm-6">
+                                        @if (!Model.PointId.HasValue && !Model.RegionId.HasValue)
+                                        {
+                                            <p class="form-control-static">
+                                                <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Привязать</a>
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
+                            }
                             <div class="form-group">
                                 <label class="col-lg-6 col-sm-6 control-label">Теги</label>
                                 <div class="col-lg-6 col-sm-6">

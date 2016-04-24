@@ -28,6 +28,10 @@
                         <a href="@Url.Action("Edit", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
                             <i class="fa fa-edit"></i>
                         </a>
+                        @if (!Model.Points.Any() && !Model.Children.Any())
+                        {
+                            <a href="@Url.Action("Delete", new { id = Model.Id })" class="btn btn-danger btn-circle" title="Удалить"><i class="fa fa-trash"></i></a>
+                        }
                     </h2>
                 </div>
             </div>
@@ -62,12 +66,12 @@
                             </div>
                             @if (Model.ParentId != null)
                             {
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Parent, new { @class = "col-lg-6 col-sm-6 control-label" })
-                                <div class="col-lg-6 col-sm-6">
-                                    <p class="form-control-static">@Html.ActionLink(Model.Parent.Name, "Details", "DataLayer", new { id = Model.ParentId}, null)</p>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Parent, new { @class = "col-lg-6 col-sm-6 control-label" })
+                                    <div class="col-lg-6 col-sm-6">
+                                        <p class="form-control-static">@Html.ActionLink(Model.Parent.Name, "Details", "DataLayer", new { id = Model.ParentId }, null)</p>
+                                    </div>
                                 </div>
-                            </div>
                             }
                         </div>
                     </div>
@@ -77,7 +81,7 @@
                 <div class="ibox-title">
                     <div class="row">
                         <div class="col-lg-11">
-                            <h3>Children layers</h3>
+                            <h3>Подчиненные слои</h3>
                         </div>
                         <div class="col-lg-1">
                             <a href="@Url.Action("Add", "DataLayer")" class="btn btn-circle btn-primary"><i class="fa fa-plus"></i></a>
@@ -86,34 +90,40 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Название</th>
-                                    <th>Описание</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Children)
-                                {
+                        @if (Model.Children.Any())
+                        {
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td>@item.Name</td>
-                                        <td>@item.Description</td>
-                                        <td>
-                                            <div class="pull-right">
-                                                <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
-                                                <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
-                                                @if (!item.Points.Any())
-                                                {
-                                                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
-                                                }
-                                            </div>
-                                        </td>
+                                        <th>Название</th>
+                                        <th>Описание</th>
+                                        <th></th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Children)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <a href="@Url.Action("Details", new {id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
+                                                    <a href="@Url.Action("Edit", new {id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
+                                                    @if (!item.Points.Any())
+                                                    {
+                                                        <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
+                                                    }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>                        }
+                        else
+                        {
+                            <p class="text-center lead">Для этого слоя данных не заданы подчиненные слои</p>
+                        }
                     </div>
                 </div>
             </div>

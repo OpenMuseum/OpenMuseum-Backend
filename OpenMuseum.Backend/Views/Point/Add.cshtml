@@ -1,4 +1,4 @@
-﻿@model OpenMuseum.Models.Point
+﻿@model OpenMuseum.Backend.Models.EditPointViewModel
 
 @{
     ViewBag.Title = "Добавить";
@@ -29,39 +29,39 @@
                 <div class="ibox-content">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Name, new {@class= "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Name)
+                            @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
+                            <div class="col-lg-8 col-sm-8">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Description)
+                            @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
+                            <div class="col-lg-10 col-sm-10">
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Latitude, new { @class = "col-lg-6 col-sm-6 control-label" })
+                            @Html.LabelFor(model => model.Region, new { @class = "col-lg-2 col-sm-2 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Latitude)
+                                @Html.DropDownListFor(model => model.RegionId, (IEnumerable<SelectListItem>)ViewBag.ListOfRegions, "--Выберите регион--", new { @class = "chosen-select" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Longitude, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Longitude)
+                            @Html.LabelFor(model => model.Latitude, new { @class = "col-lg-2 col-sm-2 control-label" })
+                            <div class="col-lg-4 col-sm-4">
+                                @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.DataLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.DataLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers)
+                            @Html.LabelFor(model => model.Longitude, new { @class = "col-lg-2 col-sm-2 control-label" })
+                            <div class="col-lg-4 col-sm-4">
+                                @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Content, new { @class = "col-lg-6 col-sm-6 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextAreaFor(model => model.Content)
+                            @Html.LabelFor(model => model.DataLayers, new { @class = "col-lg-2 col-sm-2 control-label" })
+                            <div class="col-lg-10 col-sm-10">
+                                @Html.DropDownListFor(model => model.SelectedDataLayers, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers, "--Слои данных--", new { @class = "chosen-select form-control", multiple = "multiple" })
                             </div>
                         </div>
                     </div>
@@ -79,3 +79,28 @@
         </div>
     </div>
 </div>
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    <style type="text/css">
+        .chosen-container.chosen-container-multi .chosen-choices {
+            max-height: 50px;
+            overflow-y: auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/chosen")
+
+    <script>
+        $(document).ready(function() {
+
+            $('.chosen-select').chosen({
+                width: '350px',
+                height: '50px'
+            });
+        });
+    </script>
+}

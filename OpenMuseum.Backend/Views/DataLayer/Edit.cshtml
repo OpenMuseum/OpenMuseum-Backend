@@ -1,7 +1,7 @@
 ﻿@model OpenMuseum.Models.DataLayer
 
 @{
-    ViewBag.Title = "Редактировать";
+    ViewBag.Title = "Редактировать слой данных";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
             </li>
             <li>@Html.ActionLink("Слои данных", "Index")</li>
             <li>
-                Редактировать
+                Редактировать слой данных
             </li>
             <li class="active">
                 <strong>@Model.Name</strong>
@@ -36,27 +36,27 @@
                          @Html.HiddenFor(model => model.ParentId)
 
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Name, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.TextBoxFor(model => model.Name)
+                             @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
+                             <div class="col-lg-8 col-sm-8">
+                                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                              </div>
                          </div>
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.TextAreaFor(model => model.Description)
+                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
+                             <div class="col-lg-10 col-sm-10">
+                                 @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
                              </div>
                          </div>
                          <div class="form-group">
-                             @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-2 col-sm-2 control-label" })
                              <div class="col-lg-6 col-sm-6">
-                                 @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers, new { @class = "chosen-select" })
+                                 @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers, new { @class = "chosen-select form-control" })
                              </div>
                          </div>
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Parent, new { @class = "col-lg-6 col-sm-6 control-label" })
+                             @Html.LabelFor(model => model.Parent, new { @class = "col-lg-2 col-sm-2 control-label" })
                              <div class="col-lg-6 col-sm-6">
-                                 @Html.DropDownListFor(model => model.ParentId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers, new { @class = "chosen-select" })
+                                 @Html.DropDownListFor(model => model.ParentId, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers, new { @class = "chosen-select form-control" })
                              </div>
                          </div>
                      </div>

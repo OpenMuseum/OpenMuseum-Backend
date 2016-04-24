@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using OpenMuseum.Backend.Models;
 using OpenMuseum.Models;
 using OpenMuseum.Repositories;
+using System.Collections.Generic;
 
 namespace OpenMuseum.Backend.Controllers.MVC
 {
@@ -53,6 +54,18 @@ namespace OpenMuseum.Backend.Controllers.MVC
             });
 
             context?.Dispose();
+            
+            var tagsRepository = new TagsRepository();
+            IDisposable context1 = null;
+
+            ViewBag.ListOfTags = tagsRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name
+            });
+
+            context1?.Dispose();
+
 
             return View(new PageViewModel(new Page()));
         }
@@ -64,8 +77,9 @@ namespace OpenMuseum.Backend.Controllers.MVC
         {
             try
             {
-                var pagesRepository = new PagesRepository();
+                var tagsRepository = new TagsRepository();
                 var pointsRepository = new PointsRepository();
+                var pagesRepository = new PagesRepository();
 
                 var page = new Page()
                 {
@@ -75,14 +89,37 @@ namespace OpenMuseum.Backend.Controllers.MVC
                     ExternalId = model.ExternalId
                 };
 
-                var pageId = pagesRepository.Add(page);
-                model.Point.PageId = pageId;
+                if (model.SelectedTags != null)
+                {
+                    var tags = tagsRepository.GetByStringIds(model.SelectedTags);
+                    page.Tags = new List<Tag>(tags);
+                }
+                else
+                {
+                    page.Tags = null;
+                }
 
-                pointsRepository.Add(model.Point);
+                var pageId = pagesRepository.Add(page);
+                if (!string.IsNullOrEmpty(model.Point?.Name))
+                {
+                    model.Point.PageId = pageId;
+                    pointsRepository.Add(model.Point);
+                }
+
+                if (model.RegionId != null)
+                {
+                    var regionsRepository = new RegionsRepository();
+
+                    var region = regionsRepository.GetById(model.RegionId.Value);
+                    region.Page = null;
+                    region.PageId = pageId;
+
+                    regionsRepository.Update(region);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -94,6 +131,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var pagesRepository = new PagesRepository();
 
             var model = pagesRepository.GetById(id);
+            var tagIds = model.Tags != null ? model.Tags.Select(x => x.Id) : new List<long>();
             
             var tagsRepository = new TagsRepository();
             IDisposable context = null;
@@ -101,7 +139,8 @@ namespace OpenMuseum.Backend.Controllers.MVC
             ViewBag.ListOfTags = tagsRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.Name
+                Text = x.Name,
+                Selected = tagIds.Contains(x.Id)
             });
 
             context?.Dispose();
@@ -119,16 +158,24 @@ namespace OpenMuseum.Backend.Controllers.MVC
             try
             {
                 var tagsRepository = new TagsRepository();
-                var tags = tagsRepository.GetByStringIds(model.SelectedTags);
 
                 var pagesRepository = new PagesRepository();
                 var originalPage = pagesRepository.GetById(model.Id);
+
+                if (model.SelectedTags != null)
+                {
+                    var tags = tagsRepository.GetByStringIds(model.SelectedTags);
+                    originalPage.Tags = new List<Tag>(tags);
+                }
+                else
+                {
+                    originalPage.Tags = null;
+                }
 
                 originalPage.Name = model.Name;
                 originalPage.Description = model.Description;
                 originalPage.Content = model.Content;
                 originalPage.ExternalId = model.ExternalId;
-                originalPage.Tags = tags;
 
                 pagesRepository.Update(originalPage);
 
@@ -164,7 +211,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

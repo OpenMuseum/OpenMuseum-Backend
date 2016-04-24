@@ -57,12 +57,13 @@ namespace OpenMuseum.Repositories
             modelBuilder.Entity<Page>()
                 .HasMany(x => x.Tags)
                 .WithMany(x => x.Pages)
-                .Map(x =>
+                .Map(
+                m =>
                 {
-                    x.ToTable("PageTags");
-                    x.MapLeftKey("PageId");
-                    x.MapRightKey("TagId");
-                });
+                    m.MapLeftKey("PageId");
+                    m.MapRightKey("TagId");
+                    m.ToTable("PageTags");
+                }); ;
 
             modelBuilder.Entity<Point>()
                 .HasMany(x => x.DataLayers)

@@ -35,21 +35,21 @@
                          @Html.HiddenFor(model => model.Url)
 
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Name, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.TextBoxFor(model => model.Name)
+                             @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
+                             <div class="col-lg-8 col-sm-8">
+                                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                              </div>
                          </div>
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.TextAreaFor(model => model.Description)
+                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
+                             <div class="col-lg-10 col-sm-10">
+                                 @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
                              </div>
                          </div>
                          <div class="form-group">
-                             @Html.LabelFor(model => model.Url, new { @class = "col-lg-6 col-sm-6 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 <input type="file" name="file" />
+                             @Html.LabelFor(model => model.Url, new { @class = "col-lg-2 col-sm-2 control-label" })
+                             <div class="col-lg-10 col-sm-10">
+                                 <input type="file" name="file"  class="form-control" />
                              </div>
                          </div>
                      </div>

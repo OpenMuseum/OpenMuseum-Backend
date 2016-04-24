@@ -25,12 +25,15 @@
             <div class="col-lg-4 col-sm-4">
                 <div class="pull-right">
                     <h2>
-                        <a href="@Url.Action("Add")" title="Добавить" class="btn btn-primary btn-circle">
-                            <i class="fa fa-plus"></i>
-                        </a>
                         <a href="@Url.Action("Edit", new {id = Model.Id })" title="Редактировать" class="btn btn-primary btn-circle">
                             <i class="fa fa-edit"></i>
                         </a>
+                        @if (Model.Regions == null && Model.DataLayers == null)
+                        {
+                            <a href="@Url.Action("Delete", "DataLayer", new { id = Model.Id })" class="btn btn-danger btn-circle" title="Удалить">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        }
                     </h2>
                 </div>
             </div>
@@ -99,8 +102,6 @@
                                         <td>
                                             <div class="pull-right">
                                                 <a href="@Url.Action("Details", "DataLayer", new { id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
-                                                <a href="@Url.Action("Edit", "DataLayer", new { id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
-                                                <a href="@Url.Action("Delete", "DataLayer", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -147,8 +148,6 @@
                                             <td>
                                                 <div class="pull-right">
                                                     <a href="@Url.Action("Details", "Region", new { id = item.Id })" class="btn btn-primary" title="Детали"><i class="fa fa-eye"></i></a>
-                                                    <a href="@Url.Action("Edit", "Region", new { id = item.Id })" class="btn btn-primary" title="Редактировать"><i class="fa fa-edit"></i></a>
-                                                    <a href="@Url.Action("Delete", "Region", new { id = item.Id })" class="btn btn-danger" title="Удалить"><i class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>

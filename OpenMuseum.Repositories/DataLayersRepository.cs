@@ -56,5 +56,13 @@ namespace OpenMuseum.Repositories
                 context.SaveChanges();
             }
         }
+
+        public List<DataLayer> GetByStringIds(string[] selectedDataLayers)
+        {
+            using (var context = new OpenMuseumContext())
+            {
+                return context.DataLayers.Where(x => selectedDataLayers.Contains(x.Id.ToString())).ToList();
+            }
+        }
     }
 }

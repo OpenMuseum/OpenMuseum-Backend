@@ -139,7 +139,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
                             var baseLayersRepository = new BaseLayersRepository();
 
-                            baseLayersRepository.Add(model);
+                            baseLayersRepository.Update(model);
 
                             return RedirectToAction("Index");
                         }

@@ -19,7 +19,8 @@ namespace OpenMuseum.Backend.Models
 
         public Region Region { get; set; }
         public Point Point { get; set; }
-        
+
+        public string[] SelectedTags { get; set; }
         public List<TagViewModel> Tags { get; set; }
 
         public PageViewModel() { }
