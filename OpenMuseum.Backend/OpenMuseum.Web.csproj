@@ -231,6 +231,9 @@
     <Content Include="Content\plugins\chosen\chosen-sprite%402x.png" />
     <Content Include="Content\plugins\chosen\chosen-sprite.png" />
     <Content Include="Content\plugins\chosen\chosen.min.css" />
+    <Content Include="Content\plugins\leaflet.draw\leaflet.draw.css" />
+    <Content Include="Content\plugins\leaflet.draw\images\spritesheet-2x.png" />
+    <Content Include="Content\plugins\leaflet.draw\images\spritesheet.png" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
@@ -288,6 +291,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\plugins\chosen.jquery.min.js" />
+    <Content Include="Scripts\plugins\leaflet.draw.js" />
     <Content Include="Scripts\plugins\metisMenu\metisMenu.min.js" />
     <Content Include="Scripts\plugins\pace\pace.min.js" />
     <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />

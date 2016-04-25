@@ -51,6 +51,13 @@ namespace OpenMuseum.Backend
             // chosen styles
             bundles.Add(new StyleBundle("~/Content/plugins/chosen/chosenStyles").Include(
                       "~/Content/plugins/chosen/chosen.min.css", new CssRewriteUrlTransform()));
+            // leaflet.draw 
+            bundles.Add(new ScriptBundle("~/bundles/leafletdraw").Include(
+                      "~/Scripts/plugins/leaflet.draw.js"));
+
+            // leaflet.draw
+            bundles.Add(new StyleBundle("~/Content/plugins/chosen/chosenStyles").Include(
+                      "~/Content/plugins/leaflet.draw/leaflet.draw.css", new CssRewriteUrlTransform()));
 
 
         }
