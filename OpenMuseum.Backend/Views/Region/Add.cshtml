@@ -25,51 +25,54 @@
         <div class="col-lg-12">
             @using (Html.BeginForm("Add", "Region", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-            <div class="ibox">
-                <div class="ibox-content">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
-                            <div class="col-lg-8 col-sm-8">
-                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-8 col-sm-8">
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-10 col-sm-10">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-6 col-sm-6">
+                                    @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers, new { @class = "chosen-select form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Coordinates, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-10 col-sm-10">
+                                    @Html.HiddenFor(model => model.Coordinates)
+                                    <div id="region"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
-                            <div class="col-lg-10 col-sm-10">
-                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Coordinates, new { @class = "col-lg-2 col-sm-2 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.TextBoxFor(model => model.Coordinates, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.BaseLayer, new { @class = "col-lg-2 col-sm-2 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.BaseLayerId, (IEnumerable<SelectListItem>)ViewBag.ListOfBaseLayers, new { @class = "chosen-select form-control" })
+                        <div id="region"></div>
+                    </div>
+                    <div class="ibox-footer">
+                        <div class="row">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ibox-footer">
-                    <div class="row">
-                        <div class="pull-right">
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
-                            <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-}
+            }
         </div>
     </div>
 </div>
 
 @section Styles {
     @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    @Styles.Render("~/Content/plugins/leafletdrawStyles")
 
     <style type="text/css">
         .chosen-container.chosen-container-multi .chosen-choices {
@@ -81,11 +84,89 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/chosen")
+    @Scripts.Render("~/bundles/leafletdraw")
 
     <script>
         $('.chosen-select').chosen({
             width: '250px',
             height: '50px'
+        });
+    </script>
+
+    <script type="text/javascript">
+        var regionMap = L.map('region', {
+            maxZoom: 5,
+            minZoom: 0,
+            center: [50, 50],
+            zoom: 4,
+            noWrap: true,
+            zoomControl: true
+        });
+
+        L.tileLayer('@ViewBag.BaseLayerUrl', {
+            crs: L.CRS.Simple,
+            minZoom: 0,
+            maxZoom: 5,
+            continuousWorld: true
+        }).addTo(regionMap);
+
+        var drawnItems = new L.FeatureGroup();
+        regionMap.addLayer(drawnItems);
+
+        var drawControlFull = new L.Control.Draw({
+            draw: {
+                position: 'topleft',
+                polygon: {
+                    title: 'Draw a sexy polygon!',
+                    allowIntersection: false,
+                    drawError: {
+                        color: '#b00b00',
+                        timeout: 1000
+                    },
+                    shapeOptions: {
+                        color: '#bada55'
+                    },
+                    showArea: true
+                },
+                polyline: false,
+                circle: {
+                    shapeOptions: {
+                        color: '#662d91'
+                    }
+                },
+                marker: false
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        regionMap.addControl(drawControlFull);
+        
+        var drawControlEditOnly = new L.Control.Draw({
+            edit: {
+                featureGroup: drawnItems
+            },
+            draw: false
+        });
+
+        regionMap.on('draw:created', function (e) {
+            var layer = e.layer;
+            
+            var shape = layer.toGeoJSON()
+            var shape_for_db = JSON.stringify(shape);
+
+            $('#Coordinates').val(shape_for_db);
+
+            layer.addTo(drawnItems);
+            drawControlFull.removeFrom(regionMap);
+            drawControlEditOnly.addTo(regionMap);
+        });
+
+        regionMap.on('draw:deletestop', function (e) {
+            drawControlEditOnly.removeFrom(regionMap);
+            drawControlFull.addTo(regionMap);
+
+            $('#Coordinates').val("");
         });
     </script>
 }

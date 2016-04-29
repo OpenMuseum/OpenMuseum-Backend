@@ -71,6 +71,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div id="region"></div>
+                    </div>
                 </div>
             </div>
             @if (Model.Page != null)
@@ -107,3 +110,57 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/chosen")
+    @Scripts.Render("~/bundles/leafletdraw")
+
+    <script>
+        $('.chosen-select').chosen({
+            width: '250px',
+            height: '50px'
+        });
+    </script>
+
+    <script type="text/javascript">
+        var regionMap = L.map('region', {
+            maxZoom: 5,
+            minZoom: 0,
+            center: [50, 50],
+            zoom: 4,
+            noWrap: true,
+            zoomControl: true
+        });
+
+        L.tileLayer('@ViewBag.BaseLayerUrl', {
+            crs: L.CRS.Simple,
+            minZoom: 0,
+            maxZoom: 5,
+            continuousWorld: true
+        }).addTo(regionMap);
+
+        var drawnItems = new L.FeatureGroup();
+        regionMap.addLayer(drawnItems);
+
+
+        regionMap.on('draw:created', function (e) {
+            var layer = e.layer;
+
+            var shape = layer.toGeoJSON()
+            var shape_for_db = JSON.stringify(shape);
+
+            $('#Coordinates').val(shape_for_db);
+
+            layer.addTo(drawnItems);
+            drawControlFull.removeFrom(regionMap);
+            drawControlEditOnly.addTo(regionMap);
+        });
+
+        regionMap.on('draw:deletestop', function (e) {
+            drawControlEditOnly.removeFrom(regionMap);
+            drawControlFull.addTo(regionMap);
+
+            $('#Coordinates').val("");
+        });
+    </script>
+}

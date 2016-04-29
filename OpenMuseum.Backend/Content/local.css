@@ -2,6 +2,10 @@
     height: 600px; 
 }
 
+#region { 
+    height: 400px; 
+}
+
 textarea.form-control {
     width: 100%;
 }

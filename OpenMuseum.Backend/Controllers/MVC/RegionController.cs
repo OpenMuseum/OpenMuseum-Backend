@@ -41,11 +41,15 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var baseLayersRepository = new BaseLayersRepository();
             IDisposable context;
 
-            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            var baseLayers = baseLayersRepository.GetAll(out context).ToList();
+
+            ViewBag.ListOfBaseLayers = baseLayers.Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
+
+            ViewBag.BaseLayerUrl = baseLayers.FirstOrDefault()?.Url;
 
             using (context)
             {
@@ -77,11 +81,15 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var baseLayersRepository = new BaseLayersRepository();
             IDisposable context;
 
-            ViewBag.ListOfBaseLayers = baseLayersRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            var baseLayers = baseLayersRepository.GetAll(out context).ToList();
+
+            ViewBag.ListOfBaseLayers = baseLayers.Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Name
             });
+
+            ViewBag.BaseLayerUrl = baseLayers.FirstOrDefault()?.Url;
 
             using (context)
             {
