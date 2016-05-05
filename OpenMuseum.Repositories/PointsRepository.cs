@@ -123,6 +123,7 @@ namespace OpenMuseum.Repositories
                 originalPoint.Latitude = model.Latitude;
                 originalPoint.Longitude = model.Longitude;
                 originalPoint.PageId = model.PageId;
+                originalPoint.Coordinates = model.Coordinates;
 
                 context.Entry(originalPoint).State = EntityState.Modified;
                 context.SaveChanges();

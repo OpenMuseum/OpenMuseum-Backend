@@ -29,6 +29,14 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var pointsRepository = new PointsRepository();
 
             var model = pointsRepository.GetById(id);
+            
+            var baseLayersRepository = new BaseLayersRepository();
+            IDisposable context3;
+
+            var baseLayers = baseLayersRepository.GetAll(out context3).ToList();
+
+            ViewBag.BaseLayerUrl = baseLayers.FirstOrDefault()?.Url;
+            context3?.Dispose();
 
             if (model != null)
                 return View(model);
@@ -51,6 +59,14 @@ namespace OpenMuseum.Backend.Controllers.MVC
             });
 
             context?.Dispose();
+            
+            var baseLayersRepository = new BaseLayersRepository();
+            IDisposable context3;
+
+            var baseLayers = baseLayersRepository.GetAll(out context3).ToList();
+
+            ViewBag.BaseLayerUrl = baseLayers.FirstOrDefault()?.Url;
+            context3?.Dispose();
 
             IDisposable context1;
 
@@ -82,6 +98,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
                     Description = model.Description,
                     Latitude = model.Latitude,
                     Longitude = model.Longitude,
+                    Coordinates = model.Coordinates,
                     PageId = model.PageId,
                     RegionId = model.RegionId
                 };
@@ -137,6 +154,14 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
             context1?.Dispose();
 
+            var baseLayersRepository = new BaseLayersRepository();
+            IDisposable context3;
+
+            var baseLayers = baseLayersRepository.GetAll(out context3).ToList();
+
+            ViewBag.BaseLayerUrl = baseLayers.FirstOrDefault()?.Url;
+            context3?.Dispose();
+
             if (model != null)
                 return View(new EditPointViewModel(model));
             return HttpNotFound();
@@ -169,6 +194,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
                 originalPoint.Longitude = model.Longitude;
                 originalPoint.PageId = model.PageId;
                 originalPoint.RegionId = model.RegionId;
+                originalPoint.Coordinates = model.Coordinates;
 
                 pointsRepository.Update(originalPoint);
 

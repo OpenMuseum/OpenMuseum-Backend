@@ -45,6 +45,7 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="form-horizontal">
+                            @Html.HiddenFor(model => model.Coordinates)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, new { @class = "col-lg-6 col-sm-6 control-label" })
                                 <div class="col-lg-6 col-sm-6">
@@ -55,18 +56,6 @@
                                 @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
                                 <div class="col-lg-6 col-sm-6">
                                     <p class="form-control-static">@Html.DisplayFor(model => model.Description)</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Latitude, new { @class = "col-lg-6 col-sm-6 control-label" })
-                                <div class="col-lg-6 col-sm-6">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.Latitude)</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Longitude, new { @class = "col-lg-6 col-sm-6 control-label" })
-                                <div class="col-lg-6 col-sm-6">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.Longitude)</p>
                                 </div>
                             </div>
                             @if (Model.RegionId != null)
@@ -95,6 +84,9 @@
                                 </div>
                             }
                         </div>
+                    </div>
+                    <div class="row">
+                        <div id="point"></div>
                     </div>
                 </div>
             </div>
@@ -132,3 +124,28 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        var pointMap = L.map('point', {
+            maxZoom: 5,
+            minZoom: 0,
+            center: [50, 50],
+            zoom: 4,
+            noWrap: true,
+            zoomControl: true
+        });
+
+        L.tileLayer('@ViewBag.BaseLayerUrl', {
+            crs: L.CRS.Simple,
+            minZoom: 0,
+            maxZoom: 5,
+            continuousWorld: true
+        }).addTo(pointMap);
+
+        var data = JSON.parse($('#Coordinates').val());
+
+        var datalayer = L.geoJson(data, {}).addTo(pointMap);
+    </script>
+}

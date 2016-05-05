@@ -28,65 +28,62 @@
         <div class="col-lg-12">
             @using (Html.BeginForm("Edit", "Point", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-            <div class="ibox">
-                <div class="ibox-content">
-                     <div class="form-horizontal">
-                         @Html.HiddenFor(model => model.Id)
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            @Html.HiddenFor(model => model.Id)
 
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
-                             <div class="col-lg-8 col-sm-8">
-                                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
-                             <div class="col-lg-10 col-sm-10">
-                                 @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Region, new { @class = "col-lg-2 col-sm-2 control-label" })
-                             <div class="col-lg-6 col-sm-6">
-                                 @Html.DropDownListFor(model => model.RegionId, (IEnumerable<SelectListItem>)ViewBag.ListOfRegions, "--Выберите регион--", new { @class = "chosen-select" })
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Latitude, new { @class = "col-lg-2 col-sm-2 control-label" })
-                             <div class="col-lg-4 col-sm-4">
-                                 @Html.TextBoxFor(model => model.Latitude, new { @class = "form-control" })
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.Longitude, new { @class = "col-lg-2 col-sm-2 control-label" })
-                             <div class="col-lg-4 col-sm-4">
-                                 @Html.TextBoxFor(model => model.Longitude, new { @class = "form-control" })
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             @Html.LabelFor(model => model.DataLayers, new { @class = "col-lg-2 col-sm-2 control-label" })
-                             <div class="col-lg-10 col-sm-10">
-                                 @Html.DropDownListFor(model => model.SelectedDataLayers, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers, "--Слои данных--", new { @class = "chosen-select form-control", multiple = "multiple" })
-                             </div>
-                         </div>
-                     </div>
-                </div>
-                <div class="ibox-footer">
-                    <div class="row">
-                        <div class="pull-right">
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
-                            <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-8 col-sm-8">
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-10 col-sm-10">
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Region, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-6 col-sm-6">
+                                    @Html.DropDownListFor(model => model.RegionId, (IEnumerable<SelectListItem>)ViewBag.ListOfRegions, "--Выберите регион--", new { @class = "chosen-select" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DataLayers, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-10 col-sm-10">
+                                    @Html.DropDownListFor(model => model.SelectedDataLayers, (IEnumerable<SelectListItem>)ViewBag.ListOfDataLayers, "--Слои данных--", new { @class = "chosen-select form-control", multiple = "multiple" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Coordinates, new { @class = "col-lg-2 col-sm-2 control-label" })
+                                <div class="col-lg-10 col-sm-10">
+                                    @Html.HiddenFor(model => model.Coordinates)
+                                    <div id="point"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <div class="row">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-}
+            }
         </div>
     </div>
 </div>
 
 @section Styles {
     @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    @Styles.Render("~/Content/plugins/leafletdrawStyles")
+
     <style type="text/css">
         .chosen-container.chosen-container-multi .chosen-choices {
             max-height: 50px;
@@ -97,14 +94,96 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/chosen")
+    @Scripts.Render("~/bundles/leafletdraw")
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             $('.chosen-select').chosen({
                 width: '350px',
                 height: '50px'
             });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        var pointMap = L.map('point', {
+            maxZoom: 5,
+            minZoom: 0,
+            center: [50, 50],
+            zoom: 4,
+            noWrap: true,
+            zoomControl: true
+        });
+
+        L.tileLayer('@ViewBag.BaseLayerUrl', {
+            crs: L.CRS.Simple,
+            minZoom: 0,
+            maxZoom: 5,
+            continuousWorld: true
+        }).addTo(pointMap);
+
+        var drawnItems = new L.FeatureGroup();
+        pointMap.addLayer(drawnItems);
+
+        var data = JSON.parse($('#Coordinates').val());
+        var datalayer = L.geoJson(data, {});
+        drawnItems.addLayer(datalayer.getLayers()[0]);
+
+        var drawControlFull = new L.Control.Draw({
+            draw: {
+                position: 'topleft',
+                polygon: false,
+                polyline: false,
+                circle: false,
+                rectangle: false,
+                marker: {}
+            },
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+
+        var drawControlEditOnly = new L.Control.Draw({
+            edit: {
+                featureGroup: drawnItems
+            },
+            draw: false
+        });
+
+        drawControlEditOnly.addTo(pointMap);
+
+        pointMap.on('draw:created', function (e) {
+            var layer = e.layer;
+
+            var shape = layer.toGeoJSON()
+            var shape_for_db = JSON.stringify(shape);
+
+            $('#Coordinates').val(shape_for_db);
+
+            layer.addTo(drawnItems);
+            drawControlFull.removeFrom(pointMap);
+            drawControlEditOnly.addTo(pointMap);
+        });
+
+        pointMap.on('draw:edited', function (e) {
+            var layers = e.layers;
+
+            layers.eachLayer(function (layer) {
+                var shape = layer.toGeoJSON()
+                var shape_for_db = JSON.stringify(shape);
+
+                $('#Coordinates').val(shape_for_db);
+                layer.addTo(drawnItems);
+            });
+        });
+
+        pointMap.on('draw:deletestop', function (e) {
+            drawControlEditOnly.removeFrom(pointMap);
+            drawControlFull.addTo(pointMap);
+
+            $('#Coordinates').val("");
         });
     </script>
 }

@@ -45,6 +45,7 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="form-horizontal">
+                            @Html.HiddenFor(model => model.Coordinates)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, new { @class = "col-lg-6 col-sm-6 control-label" })
                                 <div class="col-lg-6 col-sm-6">
@@ -55,12 +56,6 @@
                                 @Html.LabelFor(model => model.Description, new { @class = "col-lg-6 col-sm-6 control-label" })
                                 <div class="col-lg-6 col-sm-6">
                                     <p class="form-control-static">@Html.DisplayFor(model => model.Description)</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Coordinates, new { @class = "col-lg-6 col-sm-6 control-label" })
-                                <div class="col-lg-6 col-sm-6">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.Coordinates)</p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -112,16 +107,6 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/chosen")
-    @Scripts.Render("~/bundles/leafletdraw")
-
-    <script>
-        $('.chosen-select').chosen({
-            width: '250px',
-            height: '50px'
-        });
-    </script>
-
     <script type="text/javascript">
         var regionMap = L.map('region', {
             maxZoom: 5,
@@ -139,28 +124,7 @@
             continuousWorld: true
         }).addTo(regionMap);
 
-        var drawnItems = new L.FeatureGroup();
-        regionMap.addLayer(drawnItems);
-
-
-        regionMap.on('draw:created', function (e) {
-            var layer = e.layer;
-
-            var shape = layer.toGeoJSON()
-            var shape_for_db = JSON.stringify(shape);
-
-            $('#Coordinates').val(shape_for_db);
-
-            layer.addTo(drawnItems);
-            drawControlFull.removeFrom(regionMap);
-            drawControlEditOnly.addTo(regionMap);
-        });
-
-        regionMap.on('draw:deletestop', function (e) {
-            drawControlEditOnly.removeFrom(regionMap);
-            drawControlFull.addTo(regionMap);
-
-            $('#Coordinates').val("");
-        });
+        var data = JSON.parse($('#Coordinates').val());
+        var datalayer = L.geoJson(data, {}).addTo(regionMap);
     </script>
 }

@@ -28,6 +28,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var regionsRepository = new RegionsRepository();
 
             var model = regionsRepository.GetById(id);
+            ViewBag.BaseLayerUrl = model.BaseLayer?.Url;
 
             if (model != null)
                 return View(model);

@@ -11,6 +11,7 @@ namespace OpenMuseum.Backend.Models
         public string Description { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string Coordinates { get; set; }
         public long? RegionId { get; set; }
         public long? PageId { get; set; }
 
@@ -28,6 +29,7 @@ namespace OpenMuseum.Backend.Models
             Description = point.Description;
             Latitude = point.Longitude;
             Longitude = point.Longitude;
+            Coordinates = point.Coordinates;
             Region = point.Region;
             PageId = point.PageId;
             RegionId = point.RegionId;

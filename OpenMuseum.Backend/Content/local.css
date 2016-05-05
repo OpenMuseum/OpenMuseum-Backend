@@ -6,6 +6,10 @@
     height: 400px; 
 }
 
+#point { 
+    height: 400px; 
+}
+
 textarea.form-control {
     width: 100%;
 }
