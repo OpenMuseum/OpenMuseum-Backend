@@ -126,5 +126,6 @@
 
         var data = JSON.parse($('#Coordinates').val());
         var datalayer = L.geoJson(data, {}).addTo(regionMap);
+        regionMap.fitBounds(datalayer.getBounds());
     </script>
 }

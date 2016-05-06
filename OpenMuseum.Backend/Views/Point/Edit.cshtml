@@ -130,6 +130,7 @@
         var data = JSON.parse($('#Coordinates').val());
         var datalayer = L.geoJson(data, {});
         drawnItems.addLayer(datalayer.getLayers()[0]);
+        pointMap.fitBounds(datalayer.getBounds());
 
         var drawControlFull = new L.Control.Draw({
             draw: {

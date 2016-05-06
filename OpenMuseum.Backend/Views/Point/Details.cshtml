@@ -147,5 +147,7 @@
         var data = JSON.parse($('#Coordinates').val());
 
         var datalayer = L.geoJson(data, {}).addTo(pointMap);
+        pointMap.fitBounds(datalayer.getBounds());
+
     </script>
 }
