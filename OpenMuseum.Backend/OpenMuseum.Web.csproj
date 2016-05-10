@@ -182,6 +182,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\PagesController.cs" />
+    <Compile Include="Controllers\API\TagsController.cs" />
     <Compile Include="Controllers\API\RegionsController.cs" />
     <Compile Include="Controllers\API\PointsController.cs" />
     <Compile Include="Controllers\API\DataLayersController.cs" />
@@ -201,6 +203,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\API\BaseLayerAPIViewModel.cs" />
     <Compile Include="Models\API\DataLayerAPIViewModel.cs" />
+    <Compile Include="Models\API\TagAPIViewModel.cs" />
+    <Compile Include="Models\API\PageAPIViewModel.cs" />
     <Compile Include="Models\API\RegionAPIViewModel.cs" />
     <Compile Include="Models\API\PointAPIViewModel.cs" />
     <Compile Include="Models\BaseLayerViewModel.cs" />
@@ -280,6 +284,7 @@
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="App_Data\paris1590.zip" />
+    <Content Include="Controllers\API\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\sarkrepost.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />

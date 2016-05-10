@@ -18,10 +18,7 @@ namespace OpenMuseum.Backend.Controllers.API
             var dataLayersRepository = new DataLayersRepository();
             var layers = dataLayersRepository.GetAll(out context).ToList();
 
-            var result = layers.Select(layer => new DataLayerApiViewModel(layer)
-            {
-                Points = layer.Points.Select(point => new PointApiViewModel(point)).ToList()
-            }).ToList();
+            var result = layers.Select(layer => new DataLayerApiViewModel(layer)).ToList();
 
             context.Dispose();
 
