@@ -42,6 +42,104 @@ namespace OpenMuseum.Backend.Controllers.MVC
         }
 
         // GET: BaseLayers/Create
+        public ActionResult ChangeAttach(long id)
+        {
+            var regionsRepository = new RegionsRepository();
+
+            var region = regionsRepository.GetByPage(id);
+
+            IDisposable context = null;
+
+            ViewBag.ListOfRegions = regionsRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = region != null && region.Id == x.Id
+            });
+
+            context?.Dispose();
+
+            var pointsRepository = new PointsRepository();
+            IDisposable context1 = null;
+
+            var point = pointsRepository.GetByPage(id);
+
+            ViewBag.ListOfPoints = pointsRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = point != null && point.Id == x.Id
+            });
+
+            context1?.Dispose();
+
+            var model = new ChangeAttachViewModel()
+            {
+                Id = id,
+                OldRegionId = region?.Id,
+                OldPointId = point?.Id
+            };
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeAttach(ChangeAttachViewModel model)
+        {
+            var pageRepository = new PagesRepository();
+                var pointRepository = new PointsRepository();
+                var regionsRepository = new RegionsRepository();
+
+            var page = pageRepository.GetById(model.Id);
+
+            if (model.PointId.HasValue && model.PointId != model.OldPointId)
+            {
+                var point = pointRepository.GetById(model.PointId.Value);
+
+                point.PageId = page.Id;
+                point.Page = page;
+
+                pointRepository.Update(point);
+            }
+            else
+            {
+                if (model.OldPointId.HasValue)
+                {
+                    var point = pointRepository.GetById(model.OldPointId.Value);
+
+                    point.PageId = null;
+                    point.Page = null;
+
+                    pointRepository.Update(point);
+                }
+            }
+
+            if (model.RegionId.HasValue && model.RegionId != model.OldRegionId)
+            {
+                var region = regionsRepository.GetById(model.RegionId.Value);
+
+                region.PageId = page.Id;
+                region.Page = page;
+
+                regionsRepository.Update(region);
+            }
+            else
+            {
+                if (model.OldRegionId.HasValue)
+                {
+                    var region = regionsRepository.GetById(model.OldRegionId.Value);
+
+                    region.PageId = null;
+                    region.Page = null;
+
+                    regionsRepository.Update(region);
+                }
+            }
+
+            return RedirectToAction("Details", new { id = model.Id });
+        }
+
+        // GET: BaseLayers/Create
         public ActionResult Add()
         {
             var regionsRepository = new RegionsRepository();

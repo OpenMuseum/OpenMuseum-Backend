@@ -3,6 +3,9 @@
     ViewBag.Title = Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div id="modal-container"></div>
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
         <h2>@Model.Name</h2>
@@ -61,15 +64,19 @@
                                     <div class="col-lg-6 col-sm-6">
                                         @if (Model.PointId.HasValue)
                                         {
-                                            <p class="form-control-static">Точка (<a href="@Url.Action("Details", "Point", new { id = Model.PointId.Value })">@Model.PointName</a>) <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Сменить привязку</a></p>
+                                            <p class="form-control-static">Точка (<a href="@Url.Action("Details", "Point", new { id = Model.PointId.Value })">@Model.PointName</a>) 
+                                                <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Сменить привязку</a>
+                                            </p>
                                         }
                                         @if (Model.RegionId.HasValue)
                                         {
-                                            <p class="form-control-static">Регион (<a href="@Url.Action("Details", "Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>) <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Сменить привязку</a></p>
+                                            <p class="form-control-static">Регион (<a href="@Url.Action("Details", "Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>) 
+                                                <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Сменить привязку</a>
+                                            </p>
                                         }
                                         @if (!Model.PointId.HasValue && !Model.RegionId.HasValue)
                                         {
-                                            <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Привязать</a>
+                                            <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Привязать</a>
                                         }
                                     </div>
                                 </div>
@@ -118,3 +125,14 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryunobtrusive")
+
+    <script type="text/javascript">
+        function showChangeAttachModal() {
+            $("#changeAttachModal").modal('show');
+        };
+    </script>
+}
