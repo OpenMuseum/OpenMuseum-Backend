@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OpenMuseum.Models;
+using Newtonsoft.Json;
 
 namespace OpenMuseum.Backend.Models.API
 {
@@ -18,13 +19,21 @@ namespace OpenMuseum.Backend.Models.API
             Regions = layer.Regions.ToList().Select(region => new RegionApiViewModel(region)).ToList();
         }
 
+        [JsonProperty("id")]
         public long Id { get; set; }
+        [JsonProperty("name")]
         public string Name { get; set; }
+        [JsonProperty("description")]
         public string Description { get; set; }
+        [JsonProperty("url")]
         public string Url { get; set; }
+        [JsonProperty("default")]
         public bool Default { get; set; }
+        [JsonProperty("height")]
         public int Height { get; set; }
+        [JsonProperty("width")]
         public int Width { get; set; }
+        [JsonProperty("regions")]
         public IEnumerable<RegionApiViewModel> Regions { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using OpenMuseum.Models;
+﻿using Newtonsoft.Json;
+using OpenMuseum.Models;
 
 namespace OpenMuseum.Backend.Models.API
 {
@@ -10,16 +11,17 @@ namespace OpenMuseum.Backend.Models.API
             Name = region.Name;
             Description = region.Description;
             Coordinates = region.Coordinates;
-            BaseLayerId = region.BaseLayerId;
         }
 
         public RegionApiViewModel() {}
 
+        [JsonProperty("id")]
         public long Id { get; set; }
+        [JsonProperty("name")]
         public string Name { get; set; }
+        [JsonProperty("description")]
         public string Description { get; set; }
-        public string Content { get; set; }
+        [JsonProperty("coordinates")]
         public string Coordinates { get; set; } 
-        public long BaseLayerId { get; set; }
     }
 }
