@@ -1,13 +1,12 @@
-﻿@model OpenMuseum.Backend.Models.ChangeAttachViewModel
+﻿@model OpenMuseum.Backend.Models.ChangeAttachPageViewModel
 
 <div class="modal inmodal" id="changeAttachModal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content animated bounceInRight">
-            @using (Html.BeginForm("ChangeAttach", "Page", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("ChangeAttach", "Region", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.HiddenFor(model => model.Id)
-                @Html.HiddenFor(model => model.OldPointId)
-                @Html.HiddenFor(model => model.OldRegionId)
+                @Html.HiddenFor(model => model.OldPageId)
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Закрыть</span></button>
                     <i class="fa fa-refresh modal-icon"></i>
@@ -16,16 +15,9 @@
                 <div class="modal-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Region, new { @class = "col-lg-2 col-sm-2 control-label" })
+                            @Html.LabelFor(model => model.Page, new { @class = "col-lg-2 col-sm-2 control-label" })
                             <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.RegionId, (IEnumerable<SelectListItem>)ViewBag.ListOfRegions, "--Выберите регион--", new { @class = "chosen-select" })
-                            </div>
-                        </div>
-                        <p class="col-lg-offset-3">или</p>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Point, new { @class = "col-lg-2 col-sm-2 control-label" })
-                            <div class="col-lg-6 col-sm-6">
-                                @Html.DropDownListFor(model => model.PointId, (IEnumerable<SelectListItem>)ViewBag.ListOfPoints, "--Выберите точку--", new { @class = "chosen-select" })
+                                @Html.DropDownListFor(model => model.PageId, (IEnumerable<SelectListItem>)ViewBag.ListOfPages, "--Выберите страницу--", new { @class = "chosen-select" })
                             </div>
                         </div>
                         </div>

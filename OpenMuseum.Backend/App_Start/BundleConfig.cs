@@ -13,7 +13,7 @@ namespace OpenMuseum.Backend
                         "~/Scripts/jquery-2.1.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryunobtrusive").Include(
-                    "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+                    "~/Scripts/jquery.unobtrusive*"));
 
             // jQuery Validation
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

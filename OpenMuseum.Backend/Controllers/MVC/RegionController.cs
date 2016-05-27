@@ -36,6 +36,66 @@ namespace OpenMuseum.Backend.Controllers.MVC
                 return HttpNotFound();
         }
 
+
+        // GET: BaseLayers/Create
+        public ActionResult ChangeAttach(long id)
+        {
+            var regionsRepository = new RegionsRepository();
+            var pagesRepository = new PagesRepository();
+
+            var region = regionsRepository.GetById(id);
+
+            IDisposable context = null;
+
+            ViewBag.ListOfPages = pagesRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = region != null && region.PageId == x.Id
+            });
+
+            context?.Dispose();
+
+            var model = new ChangeAttachPageViewModel()
+            {
+                Id = id,
+                OldPageId = region?.PageId
+            };
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeAttach(ChangeAttachPageViewModel model)
+        {
+            var pageRepository = new PagesRepository();
+            var regionRepository = new RegionsRepository();
+
+            var region = regionRepository.GetById(model.Id);
+
+            if (model.PageId.HasValue && model.PageId != region.PageId)
+            {
+                var page = pageRepository.GetById(model.PageId.Value);
+
+                region.PageId = page.Id;
+                region.Page = page;
+
+                regionRepository.Update(region);
+            }
+            else
+            {
+                if (model.OldPageId.HasValue)
+                {
+                    region.PageId = null;
+                    region.Page = null;
+
+                    regionRepository.Update(region);
+                }
+            }
+
+            return RedirectToAction("Details", new { id = model.Id });
+        }
+
         // GET: BaseLayers/Create
         public ActionResult Add()
         {

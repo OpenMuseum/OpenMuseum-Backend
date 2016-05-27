@@ -79,7 +79,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
                 OldRegionId = region?.Id,
                 OldPointId = point?.Id
             };
-
+            
             return PartialView(model);
         }
 

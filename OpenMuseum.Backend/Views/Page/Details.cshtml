@@ -74,10 +74,6 @@
                                                 <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Сменить привязку</a>
                                             </p>
                                         }
-                                        @if (!Model.PointId.HasValue && !Model.RegionId.HasValue)
-                                        {
-                                            <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Привязать</a>
-                                        }
                                     </div>
                                 </div>
                             }
@@ -89,7 +85,7 @@
                                         @if (!Model.PointId.HasValue && !Model.RegionId.HasValue)
                                         {
                                             <p class="form-control-static">
-                                                <a href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })"><i class="fa fa-refresh"></i> Привязать</a>
+                                                <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Привязать</a>
                                             </p>
                                         }
                                     </div>

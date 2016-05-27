@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div id="modal-container"></div>
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-7 col-sm-5">
         <h2>@Model.Name</h2>
@@ -79,7 +81,7 @@
                             <h3>Содержимое присоединённой страницы (<a href="@Url.Action("Details", "Page", new { id = Model.Page.Id })">@Model.Page.Name</a>)</h3>
                         </div>
                         <div class="col-lg-1">
-                            <a href="@Url.Action("Add", "DataLayer")" class="btn btn-circle btn-primary" title="Сменить"><i class="fa fa-refresh"></i></a>
+                            <a class="btn btn-circle btn-primary" title="Сменить" href="@Url.Action("ChangeAttach", "Region", new { id = Model.Id})" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i></a>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -97,7 +99,7 @@
                             <h3>Страница не присоединена</h3>
                         </div>
                         <div class="col-lg-1">
-                            <a href="@Url.Action("Add", "DataLayer")" class="btn btn-circle btn-primary" title="Присоединить"><i class="fa fa-refresh"></i></a>
+                            <a href="@Url.Action("ChangeAttach", "Region", new { id = Model.Id})" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal" class="btn btn-circle btn-primary" title="Присоединить"><i class="fa fa-refresh"></i></a>
                         </div>
                     </div>
                 </div>
@@ -107,6 +109,14 @@
 </div>
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryunobtrusive")
+
+    <script type="text/javascript">
+        function showChangeAttachModal() {
+            $("#changeAttachModal").modal('show');
+        };
+    </script>
+
     <script type="text/javascript">
         var regionMap = L.map('region', {
             maxZoom: 5,
@@ -126,6 +136,7 @@
 
         var data = JSON.parse($('#Coordinates').val());
         var datalayer = L.geoJson(data, {}).addTo(regionMap);
+
         regionMap.fitBounds(datalayer.getBounds());
     </script>
 }

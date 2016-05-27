@@ -29,7 +29,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var pointsRepository = new PointsRepository();
 
             var model = pointsRepository.GetById(id);
-            
+
             var baseLayersRepository = new BaseLayersRepository();
             IDisposable context3;
 
@@ -42,6 +42,65 @@ namespace OpenMuseum.Backend.Controllers.MVC
                 return View(model);
             else
                 return HttpNotFound();
+        }
+
+        // GET: BaseLayers/Create
+        public ActionResult ChangeAttach(long id)
+        {
+            var pagesRepository = new PagesRepository();
+            var pointsRepository = new PointsRepository();
+
+            var point = pointsRepository.GetById(id);
+
+            IDisposable context = null;
+
+            ViewBag.ListOfPages = pagesRepository.GetAll(out context).ToList().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Name,
+                Selected = point != null && point.PageId == x.Id
+            });
+
+            context?.Dispose();
+
+            var model = new ChangeAttachPageViewModel()
+            {
+                Id = id,
+                OldPageId = point?.PageId
+            };
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeAttach(ChangeAttachPageViewModel model)
+        {
+            var pageRepository = new PagesRepository();
+            var pointRepository = new PointsRepository();
+
+            var point = pointRepository.GetById(model.Id);
+
+            if (model.PageId.HasValue && model.PageId != point.PageId)
+            {
+                var page = pageRepository.GetById(model.PageId.Value);
+
+                point.PageId = page.Id;
+                point.Page = page;
+
+                pointRepository.Update(point);
+            }
+            else
+            {
+                if (model.OldPageId.HasValue)
+                {
+                    point.PageId = null;
+                    point.Page = null;
+
+                    pointRepository.Update(point);
+                }
+            }
+
+            return RedirectToAction("Details", new { id = model.Id });
         }
 
         // GET: BaseLayers/Create
@@ -59,7 +118,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
             });
 
             context?.Dispose();
-            
+
             var baseLayersRepository = new BaseLayersRepository();
             IDisposable context3;
 
@@ -143,7 +202,7 @@ namespace OpenMuseum.Backend.Controllers.MVC
             });
 
             context?.Dispose();
-            
+
             IDisposable context1 = null;
 
             ViewBag.ListOfRegions = regionsRepository.GetAll(out context1).ToList().Select(x => new SelectListItem()
