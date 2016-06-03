@@ -10,7 +10,7 @@ namespace OpenMuseum.Backend
         {
             // Vendor scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.1.1.min.js"));
+                        "~/Scripts/jquery-2.1.3.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryunobtrusive").Include(
                     "~/Scripts/jquery.unobtrusive*"));
