@@ -110,7 +110,10 @@
             </div>
             <div class="ibox">
                 <div class="ibox-title">
-                    <h3>Page content</h3>
+                    <h3>
+                        Содержимое страницы
+                        <a class="btn pull-right" title="Сменить привязку" href="@Url.Action("ExternalAttach", "Page", new {id = Model.Id})" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#modal-container" data-ajax-success="showExternalAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Привязать внешнюю страницу</a>
+                    </h3>
                 </div>
                 <div class="ibox-content">
                     <div class="row">

@@ -229,6 +229,11 @@
     <Compile Include="Models\RegionViewModel.cs" />
     <Compile Include="Models\PointViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -297,12 +302,10 @@
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="App_Data\paris1590.zip" />
     <None Include="Properties\PublishProfiles\sarkrepost.pubxml" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
@@ -379,15 +382,13 @@
     <Content Include="Views\Point\ChangeAttach.cshtml" />
     <Content Include="Views\Region\ChangeAttach.cshtml" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <Content Include="Views\Page\ExternalAttach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Public\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenMuseum.Models\OpenMuseum.Models.csproj">

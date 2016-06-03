@@ -5,6 +5,9 @@ using OpenMuseum.Backend.Models;
 using OpenMuseum.Models;
 using OpenMuseum.Repositories;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using OpenMuseum.Backend.Properties;
+using TildaNET.Client;
 
 namespace OpenMuseum.Backend.Controllers.MVC
 {
@@ -39,6 +42,23 @@ namespace OpenMuseum.Backend.Controllers.MVC
                 return View(new PageViewModel(model, point, region));
             else
                 return HttpNotFound();
+        }
+
+        // GET: BaseLayers/Create
+        public async Task<ActionResult> ExternalAttach(long id)
+        {
+            var tildaClient = new TildaClient(Settings.Default.PublicKey, Settings.Default.SecretKey);
+
+            var pages = await tildaClient.GetPagesList(Settings.Default.TildaProjectId);
+
+            ViewBag.ListOfTildaPages = pages.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Title,
+                Selected = false
+            });
+
+            return PartialView();
         }
 
         // GET: BaseLayers/Create
