@@ -51,12 +51,22 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
             var pages = await tildaClient.GetPagesList(Settings.Default.TildaProjectId);
 
+            var pageRepository = new PagesRepository();
+            var page = pageRepository.GetById(id);
+            
+
             ViewBag.ListOfTildaPages = pages.Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
                 Text = x.Title,
-                Selected = false
+                Selected = page.ExternalId != null && string.Equals(x.Id, page.ExternalId)
             });
+
+            var model = new ExternalAttachViewModel()
+            {
+                Id = id,
+                PageId = long.Parse(page.ExternalId)
+            };
 
             return PartialView();
         }
@@ -155,6 +165,19 @@ namespace OpenMuseum.Backend.Controllers.MVC
                     regionsRepository.Update(region);
                 }
             }
+
+            return RedirectToAction("Details", new { id = model.Id });
+        }
+
+
+        [HttpPost]
+        public ActionResult ExternalAttach(ChangeAttachViewModel model)
+        {
+            var pageRepository = new PagesRepository();
+
+            var page = pageRepository.GetById(model.Id);
+            
+
 
             return RedirectToAction("Details", new { id = model.Id });
         }

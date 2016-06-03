@@ -219,6 +219,7 @@
     <Compile Include="Models\API\PointAPIViewModel.cs" />
     <Compile Include="Models\BaseLayerViewModel.cs" />
     <Compile Include="Models\ChangeAttachPageViewModel.cs" />
+    <Compile Include="Models\ExternalAttachViewModel.cs" />
     <Compile Include="Models\DataLayerViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\EditPageViewModel.cs" />
