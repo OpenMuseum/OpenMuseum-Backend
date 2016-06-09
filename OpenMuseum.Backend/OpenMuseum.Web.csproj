@@ -172,8 +172,8 @@
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TildaNET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TildaNET.1.1\lib\net452\TildaNET.dll</HintPath>
+    <Reference Include="TildaNET, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TildaNET.1.1.1\lib\net452\TildaNET.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -384,6 +384,7 @@
     <Content Include="Views\Region\ChangeAttach.cshtml" />
     <Content Include="Scripts\jquery-2.2.3.min.map" />
     <Content Include="Views\Page\ExternalAttach.cshtml" />
+    <Content Include="Views\Page\ExternalAttachPageContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Public\" />

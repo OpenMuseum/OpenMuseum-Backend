@@ -65,10 +65,19 @@ namespace OpenMuseum.Backend.Controllers.MVC
             var model = new ExternalAttachViewModel()
             {
                 Id = id,
-                PageId = long.Parse(page.ExternalId)
+                PageId = !string.IsNullOrEmpty(page.ExternalId) ? long.Parse(page.ExternalId) : (long?)null
             };
 
-            return PartialView();
+            return PartialView(model);
+        }
+
+        // GET: BaseLayers/Create
+        public ActionResult ExternalAttachPageContent(long id)
+        {
+            var pageRepository = new PagesRepository();
+            var page = pageRepository.GetById(id);
+
+            return View(new PageViewModel(page));
         }
 
         // GET: BaseLayers/Create
@@ -171,13 +180,19 @@ namespace OpenMuseum.Backend.Controllers.MVC
 
 
         [HttpPost]
-        public ActionResult ExternalAttach(ChangeAttachViewModel model)
+        public async Task<ActionResult> ExternalAttach(ExternalAttachViewModel model)
         {
             var pageRepository = new PagesRepository();
 
             var page = pageRepository.GetById(model.Id);
-            
 
+            var tildaClient = new TildaClient(Settings.Default.PublicKey, Settings.Default.SecretKey);
+            var tildaPage = await tildaClient.GetPageFull(model.PageId.Value);
+
+            page.Content = tildaPage.Html;
+            page.ExternalId = tildaPage.Id;
+
+            pageRepository.Update(page);
 
             return RedirectToAction("Details", new { id = model.Id });
         }

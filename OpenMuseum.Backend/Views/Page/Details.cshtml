@@ -64,13 +64,15 @@
                                     <div class="col-lg-6 col-sm-6">
                                         @if (Model.PointId.HasValue)
                                         {
-                                            <p class="form-control-static">Точка (<a href="@Url.Action("Details", "Point", new { id = Model.PointId.Value })">@Model.PointName</a>) 
+                                            <p class="form-control-static">
+                                                Точка (<a href="@Url.Action("Details", "Point", new { id = Model.PointId.Value })">@Model.PointName</a>)
                                                 <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Сменить привязку</a>
                                             </p>
                                         }
                                         @if (Model.RegionId.HasValue)
                                         {
-                                            <p class="form-control-static">Регион (<a href="@Url.Action("Details", "Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>) 
+                                            <p class="form-control-static">
+                                                Регион (<a href="@Url.Action("Details", "Region", new { id = Model.RegionId.Value })">@Model.RegionName</a>)
                                                 <a class="btn" title="Сменить привязку" href="@Url.Action("ChangeAttach", "Page", new { id = Model.Id })" data-ajax="true" data-ajax-update="#modal-container" data-ajax-success="showChangeAttachModal" data-backdrop="false" data-dismiss="modal"><i class="fa fa-refresh"></i> Сменить привязку</a>
                                             </p>
                                         }
@@ -117,7 +119,16 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        @Html.Raw(Model.Content)
+                        @if (!string.IsNullOrEmpty(Model.ExternalId))
+                        {
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <iframe class="embed-responsive-item" src="@Url.Action("ExternalAttachPageContent", "Page", new {id = Model.Id})"></iframe>
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.Raw(Model.Content)
+                        }
                     </div>
                 </div>
             </div>
@@ -130,8 +141,8 @@
     @Scripts.Render("~/bundles/jqueryunobtrusive")
 
     <script type="text/javascript">
-        function showChangeAttachModal() {
-            $("#changeAttachModal").modal('show');
+        function showExternalAttachModal() {
+            $("#externalAttachModal").modal('show');
         };
     </script>
 }
