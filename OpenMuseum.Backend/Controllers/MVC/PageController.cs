@@ -197,6 +197,20 @@ namespace OpenMuseum.Backend.Controllers.MVC
             return RedirectToAction("Details", new { id = model.Id });
         }
 
+        public ActionResult ExternalDeattach(long id)
+        {
+            var pageRepository = new PagesRepository();
+
+            var page = pageRepository.GetById(id);
+
+            page.Content = null;
+            page.ExternalId = null;
+
+            pageRepository.Update(page);
+
+            return RedirectToAction("Details", new { id });
+        }
+
         // GET: BaseLayers/Create
         public ActionResult Add()
         {
